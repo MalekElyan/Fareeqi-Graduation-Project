@@ -1,0 +1,237 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;direction:rtl;background:transparent;}
+.wrap{display:flex;justify-content:center;padding:24px 8px;}
+.device{width:252px;background:#0a0a0a;border-radius:44px;padding:7px;box-shadow:0 24px 60px rgba(0,0,0,.28),inset 0 0 0 1px #2a2a2a;}
+.ibar{height:14px;display:flex;justify-content:center;align-items:center;}
+.isl{width:68px;height:8px;background:#0a0a0a;border-radius:20px;border:1px solid #222;}
+.screen{border-radius:37px;overflow:hidden;background:#F2F4F0;min-height:580px;display:flex;flex-direction:column;}
+
+/* status bar */
+.sbar{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:rgba(255,255,255,.5);padding:10px 18px 0;background:#1B5E38;}
+
+/* green header */
+.header{background:#1B5E38;padding:8px 16px 22px;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(255,255,255,.05);top:-80px;right:-50px;}
+.header::after{content:'';position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.03);bottom:-20px;left:-20px;}
+.h-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.h-title{font-size:18px;font-weight:700;color:#fff;}
+.h-action{font-size:11px;font-weight:600;color:rgba(255,255,255,.55);}
+.h-icon{width:32px;height:32px;background:rgba(255,255,255,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.15);}
+.h-icon svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;}
+
+/* unread count pill */
+.unread-pill{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 12px;margin-top:10px;display:inline-flex;align-items:center;gap:6px;position:relative;z-index:1;}
+.up-dot{width:8px;height:8px;border-radius:50%;background:#6adb8a;}
+.up-txt{font-size:11px;font-weight:600;color:rgba(255,255,255,.8);}
+
+/* wave */
+.wave{background:#1B5E38;height:24px;}
+.wave svg{width:100%;height:24px;display:block;}
+
+/* filter tabs */
+.tabs{display:flex;gap:6px;padding:10px 14px 0;}
+.tab{padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;}
+.tab-on{background:#1B5E38;color:#fff;}
+.tab-off{background:#fff;color:#7a8e7a;border:1.5px solid #E0E8DC;}
+
+/* notif list */
+.notif-list{padding:10px 12px 0;display:flex;flex-direction:column;gap:0;flex:1;}
+
+/* section header */
+.sec-hdr{font-size:10px;font-weight:700;color:#AAB4AA;text-align:right;padding:8px 4px 6px;letter-spacing:.4px;}
+
+/* single notif card */
+.ncard{background:#fff;border-radius:14px;padding:12px 13px;display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;position:relative;}
+.ncard.unread{border-right:3px solid #1B5E38;}
+.ncard.unread-blue{border-right:3px solid #185FA5;}
+.ncard.unread-gold{border-right:3px solid #d4880a;}
+.ncard.unread-red{border-right:3px solid #c0392b;}
+
+/* notif icon */
+.n-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ni-green{background:#EBF5EE;}
+.ni-blue{background:#E6F0FB;}
+.ni-gold{background:#FFF8E6;}
+.ni-red{background:#FEF0F0;}
+.ni-gray{background:#F4F4F2;}
+.n-icon svg{width:18px;height:18px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.svg-green{stroke:#1B5E38;}
+.svg-blue{stroke:#185FA5;}
+.svg-gold{stroke:#d4880a;}
+.svg-red{stroke:#c0392b;}
+.svg-gray{stroke:#888;}
+
+/* avatar icon style */
+.n-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;}
+.nav-green{background:#C5E3CE;color:#1B5E38;}
+.nav-blue{background:#B5D4F4;color:#185FA5;}
+.nav-pink{background:#F4C0D1;color:#993556;}
+
+/* notif content */
+.n-body{flex:1;min-width:0;}
+.n-top{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:3px;}
+.n-title{font-size:12px;font-weight:700;color:#0f1e13;line-height:1.3;text-align:right;flex:1;}
+.n-time{font-size:10px;color:#aaa;flex-shrink:0;white-space:nowrap;}
+.n-desc{font-size:11px;color:#8a9e8a;line-height:1.5;text-align:right;}
+.n-desc span{color:#1B5E38;font-weight:600;}
+
+/* action buttons on notif */
+.n-actions{display:flex;gap:6px;margin-top:8px;}
+.na-btn{flex:1;padding:6px 0;border-radius:9px;font-size:10px;font-weight:700;text-align:center;}
+.na-accept{background:#EBF5EE;color:#1B5E38;border:1px solid #C8E6D0;}
+.na-decline{background:#FEF0F0;color:#c0392b;border:1px solid #FACCCA;}
+
+/* unread dot top left */
+.unread-dot{position:absolute;top:12px;left:12px;width:8px;height:8px;border-radius:50%;background:#1B5E38;}
+.unread-dot-blue{background:#185FA5;}
+.unread-dot-gold{background:#d4880a;}
+
+/* tag pill on notif */
+.n-tag{background:#EBF5EE;color:#1B5E38;font-size:9px;font-weight:700;padding:2px 8px;border-radius:8px;border:1px solid #C8E6D0;display:inline-block;margin-top:4px;}
+.n-tag-blue{background:#E6F0FB;color:#185FA5;border-color:#B5D4F4;}
+.n-tag-gold{background:#FFF8E6;color:#d4880a;border-color:#FFE0A0;}
+</style>
+
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;">صفحة الإشعارات</h2>
+
+<div class="wrap">
+  <div class="device">
+    <div class="ibar"><div class="isl"></div></div>
+    <div class="screen">
+
+      <div class="sbar"><span>9:41</span><span>▲▲ ▬</span></div>
+
+      <!-- header -->
+      <div class="header">
+        <div class="h-row">
+          <span class="h-action">تعليم الكل مقروء</span>
+          <div class="h-title">الإشعارات</div>
+          <div class="h-icon">
+            <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+          </div>
+        </div>
+        <div class="unread-pill">
+          <div class="up-dot"></div>
+          <span class="up-txt">5 إشعارات غير مقروءة</span>
+        </div>
+      </div>
+      <div class="wave">
+        <svg viewBox="0 0 252 24" preserveAspectRatio="none"><path d="M0 24 Q63 0 126 14 Q189 24 252 6 L252 24 Z" fill="#F2F4F0"/></svg>
+      </div>
+
+      <!-- tabs -->
+      <div class="tabs">
+        <span class="tab tab-on">الكل</span>
+        <span class="tab tab-off">طلبات</span>
+        <span class="tab tab-off">مسابقات</span>
+        <span class="tab tab-off">فرق</span>
+      </div>
+
+      <!-- notifications -->
+      <div class="notif-list">
+
+        <div class="sec-hdr">الآن</div>
+
+        <!-- 1: join request -->
+        <div class="ncard unread">
+          <div class="unread-dot"></div>
+          <div class="n-av nav-green">ل</div>
+          <div class="n-body">
+            <div class="n-top">
+              <div class="n-title">طلب انضمام جديد</div>
+              <span class="n-time">الآن</span>
+            </div>
+            <div class="n-desc"><span>ليلى حسن</span> تطلب الانضمام لمشروعك</div>
+            <span class="n-tag">نظام تتبع الحافلات</span>
+            <div class="n-actions">
+              <div class="na-btn na-decline">رفض</div>
+              <div class="na-btn na-accept">قبول ✓</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2: contest deadline -->
+        <div class="ncard unread-gold">
+          <div class="unread-dot unread-dot-gold"></div>
+          <div class="n-icon ni-gold">
+            <svg class="svg-gold" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="n-body">
+            <div class="n-top">
+              <div class="n-title">اقترب موعد الانتهاء</div>
+              <span class="n-time">منذ 5د</span>
+            </div>
+            <div class="n-desc">تبقّى <span>3 أيام</span> على انتهاء التسجيل</div>
+            <span class="n-tag n-tag-gold">تحدي الابتكار</span>
+          </div>
+        </div>
+
+        <div class="sec-hdr">اليوم</div>
+
+        <!-- 3: accepted into team -->
+        <div class="ncard unread">
+          <div class="unread-dot"></div>
+          <div class="n-icon ni-green">
+            <svg class="svg-green" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+          </div>
+          <div class="n-body">
+            <div class="n-top">
+              <div class="n-title">تم قبولك في الفريق 🎉</div>
+              <span class="n-time">10:30</span>
+            </div>
+            <div class="n-desc">انضممت رسمياً لـ <span>فريق المبدعين</span></div>
+            <span class="n-tag">تحدي الابتكار</span>
+          </div>
+        </div>
+
+        <!-- 4: new message -->
+        <div class="ncard unread-blue">
+          <div class="unread-dot unread-dot-blue"></div>
+          <div class="n-av nav-blue">م</div>
+          <div class="n-body">
+            <div class="n-top">
+              <div class="n-title">رسالة جديدة</div>
+              <span class="n-time">9:15</span>
+            </div>
+            <div class="n-desc"><span>محمد علي</span>: رفعت الكود على GitHub ✅</div>
+            <span class="n-tag n-tag-blue">نظام الحافلات</span>
+          </div>
+        </div>
+
+        <div class="sec-hdr">أمس</div>
+
+        <!-- 5: rank update -->
+        <div class="ncard">
+          <div class="n-icon ni-gold">
+            <svg class="svg-gold" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="n-body">
+            <div class="n-top">
+              <div class="n-title">ترتيبك تحسّن! 🏆</div>
+              <span class="n-time">أمس</span>
+            </div>
+            <div class="n-desc">وصلت للمرتبة <span>#1</span> على مستوى الجامعة</div>
+          </div>
+        </div>
+
+        <!-- 6: system -->
+        <div class="ncard">
+          <div class="n-icon ni-gray">
+            <svg class="svg-gray" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="n-body">
+            <div class="n-top">
+              <div class="n-title">تحديث التطبيق</div>
+              <span class="n-time">أمس</span>
+            </div>
+            <div class="n-desc">ميزات جديدة متاحة — جرّب صفحة الاستكشاف المحدّثة</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

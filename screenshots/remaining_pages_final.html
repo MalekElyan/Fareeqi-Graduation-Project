@@ -1,0 +1,335 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;direction:rtl;background:transparent;}
+.wrap{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;padding:24px 8px;}
+.col{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.lbl{font-size:11px;color:#888;}
+.device{width:232px;background:#0a0a0a;border-radius:42px;padding:6px;box-shadow:0 20px 50px rgba(0,0,0,.28),inset 0 0 0 1px #2a2a2a;}
+.ibar{height:13px;display:flex;justify-content:center;align-items:center;}
+.isl{width:64px;height:7px;background:#0a0a0a;border-radius:20px;border:1px solid #222;}
+.screen{border-radius:35px;overflow:hidden;background:#F2F4F0;min-height:530px;display:flex;flex-direction:column;}
+.sbar{display:flex;justify-content:space-between;font-size:10px;font-weight:700;padding:9px 16px 0;}
+.sb-g{background:#1B5E38;color:rgba(255,255,255,.5);}
+.sb-w{background:#F2F4F0;color:#888;}
+.wave{background:#1B5E38;height:22px;}
+.wave svg{width:100%;height:22px;display:block;}
+.hdr{background:#1B5E38;padding:8px 15px 18px;position:relative;overflow:hidden;}
+.hdr::before{content:'';position:absolute;width:170px;height:170px;border-radius:50%;border:1px solid rgba(255,255,255,.05);top:-65px;right:-35px;}
+.hdr::after{content:'';position:absolute;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.03);bottom:-18px;left:-18px;}
+.hdr-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.hdr-title{font-size:17px;font-weight:700;color:#fff;}
+.hicon{width:30px;height:30px;background:rgba(255,255,255,.12);border-radius:9px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.14);}
+.hicon svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;}
+.card{background:#fff;border-radius:14px;margin:0 12px 9px;padding:13px;}
+.sec-lbl{font-size:10px;font-weight:700;color:#1B5E38;letter-spacing:.5px;margin-bottom:8px;text-align:right;}
+.svg-g{stroke:#1B5E38;}
+.svg-b{stroke:#185FA5;}
+.svg-o{stroke:#c9700a;}
+.svg-r{stroke:#c0392b;}
+.svg-gr{stroke:#888;}
+
+/* ══ LOGIN ══ */
+.login-screen{background:#F2F4F0;}
+.login-hero{background:#1B5E38;padding:10px 16px 60px;position:relative;overflow:hidden;text-align:center;}
+.login-hero::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(255,255,255,.05);top:-80px;right:-50px;}
+.login-hero::after{content:'';position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.03);bottom:-20px;left:-20px;}
+.lh-sbar{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:rgba(255,255,255,.45);margin-bottom:20px;position:relative;z-index:1;}
+.logo-ring{width:70px;height:70px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;margin:0 auto;position:relative;z-index:1;}
+.logo-inner{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;}
+.logo-inner svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.4;stroke-linecap:round;}
+.lh-name{font-size:20px;font-weight:700;color:#fff;margin-top:10px;position:relative;z-index:1;}
+.lh-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:4px;position:relative;z-index:1;}
+.login-wave{background:#1B5E38;height:26px;}
+.login-wave svg{width:100%;height:26px;display:block;}
+.login-card{background:#fff;border-radius:20px;margin:0 14px;margin-top:-18px;padding:20px 16px 16px;border:1px solid rgba(0,0,0,.05);}
+.lc-title{font-size:16px;font-weight:700;color:#0f1e13;text-align:right;margin-bottom:16px;}
+.field-g{margin-bottom:12px;}
+.field-g:last-of-type{margin-bottom:0;}
+.fl{font-size:11px;font-weight:600;color:#6a7e6a;text-align:right;margin-bottom:5px;}
+.fi{display:flex;align-items:center;justify-content:space-between;background:#F6F8F4;border:1.5px solid #E0E8DC;border-radius:12px;padding:10px 12px;}
+.fi.act{border-color:#1B5E38;background:#FAFFFC;}
+.fi-val{font-size:13px;font-weight:500;color:#1a2e1a;flex:1;text-align:right;}
+.fi-ph{color:#C0CCBA;font-weight:400;}
+.fi-icon{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;}
+.fii-g{background:#EBF5EE;}
+.fii-gr{background:#F4F4F2;}
+.fi-icon svg{width:12px;height:12px;fill:none;stroke-width:2.2;stroke-linecap:round;}
+.forgot{font-size:11px;color:#1B5E38;font-weight:600;text-align:left;margin-top:6px;}
+.login-btn{background:#1B5E38;color:#fff;font-size:13px;font-weight:700;border-radius:14px;padding:13px 0;text-align:center;margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.lb-arr{width:24px;height:24px;background:rgba(255,255,255,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.login-divider{display:flex;align-items:center;gap:8px;margin:14px 0;}
+.ld-line{flex:1;height:1px;background:#E8EDE8;}
+.ld-txt{font-size:10px;color:#aaa;}
+.signup-row{text-align:center;font-size:11px;color:#aaa;}
+.signup-row span{color:#1B5E38;font-weight:700;}
+
+/* ══ CONTEST DETAILS ══ */
+.contest-hero{background:#1B5E38;padding:10px 15px 52px;position:relative;overflow:hidden;}
+.contest-hero::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.05);top:-60px;right:-40px;}
+.contest-hero::after{content:'';position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.04);bottom:-20px;left:-20px;}
+.ch-sbar{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:rgba(255,255,255,.45);margin-bottom:10px;}
+.ch-nav{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+.ch-back{width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.2);}
+.ch-back svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;}
+.ch-bk{width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.2);}
+.ch-bk svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;}
+.ch-type{background:rgba(255,255,255,.18);color:#fff;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;border:1px solid rgba(255,255,255,.22);}
+.ct-title{font-size:18px;font-weight:700;color:#fff;margin-top:14px;line-height:1.3;position:relative;z-index:1;}
+.ct-org{display:flex;align-items:center;gap:5px;margin-top:6px;position:relative;z-index:1;}
+.ct-org svg{width:12px;height:12px;stroke:rgba(255,255,255,.6);fill:none;stroke-width:2;stroke-linecap:round;}
+.ct-org span{font-size:10px;color:rgba(255,255,255,.6);}
+/* deadline banner */
+.deadline-banner{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:8px 12px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.db-left{display:flex;align-items:center;gap:6px;}
+.db-icon{width:22px;height:22px;background:rgba(255,255,255,.15);border-radius:6px;display:flex;align-items:center;justify-content:center;}
+.db-icon svg{width:11px;height:11px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;}
+.db-txt{font-size:10px;color:rgba(255,255,255,.8);font-weight:600;}
+.db-days{font-size:13px;font-weight:700;color:#6adb8a;}
+.cwave{background:#1B5E38;height:26px;}
+.cwave svg{width:100%;height:26px;display:block;}
+/* stats */
+.c-stats{display:flex;gap:7px;padding:0 12px;margin-top:-13px;position:relative;z-index:2;}
+.cs{flex:1;background:#fff;border-radius:12px;padding:8px 5px;text-align:center;border:1px solid #E8EDE8;}
+.cs-icon{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;margin:0 auto 3px;}
+.csi-g{background:#EBF5EE;}
+.csi-b{background:#E6F0FB;}
+.csi-o{background:#FFF3E0;}
+.cs-icon svg{width:11px;height:11px;fill:none;stroke-width:2.2;stroke-linecap:round;}
+.cs-val{font-size:12px;font-weight:700;color:#0f1e13;}
+.cs-lbl{font-size:9px;color:#aaa;}
+/* tabs */
+.c-tabs{display:flex;gap:0;margin:10px 12px 0;background:#fff;border-radius:12px;padding:3px;border:1px solid #E8EDE8;}
+.c-tab{flex:1;text-align:center;font-size:10px;padding:6px 0;border-radius:9px;color:#aaa;font-weight:500;}
+.c-tab.on{background:#1B5E38;color:#fff;font-weight:700;}
+/* prizes */
+.prize-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
+.pr-place{display:flex;align-items:center;gap:6px;}
+.pr-medal{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.pm-gold{background:#FFF3CC;}
+.pm-silver{background:#F0F0EE;}
+.pm-bronze{background:#FFF0E8;}
+.pr-name{font-size:11px;font-weight:600;color:#0f1e13;}
+.pr-val{font-size:12px;font-weight:700;color:#1B5E38;}
+/* rules */
+.rule-item{display:flex;align-items:flex-start;gap:7px;margin-bottom:6px;}
+.rule-dot{width:6px;height:6px;border-radius:50%;background:#1B5E38;margin-top:4px;flex-shrink:0;}
+.rule-txt{font-size:11px;color:#6a7e6a;line-height:1.5;text-align:right;}
+/* cta */
+.c-cta{display:flex;gap:8px;padding:0 12px 14px;}
+.c-btn-m{flex:2;background:#1B5E38;color:#fff;font-size:12px;font-weight:700;border-radius:13px;padding:11px 0;text-align:center;}
+.c-btn-s{flex:1;background:#EBF5EE;color:#1B5E38;font-size:12px;font-weight:700;border-radius:13px;padding:11px 0;text-align:center;border:1.5px solid #C8E6D0;}
+
+/* ══ EMPTY STATE ══ */
+.empty-screen{background:#F2F4F0;}
+.es-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
+.es-illus{width:110px;height:110px;border-radius:28px;background:#fff;border:1px solid #E8EDE8;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.es-illus svg{width:52px;height:52px;stroke:#C8D4C0;fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;}
+.es-title{font-size:17px;font-weight:700;color:#0f1e13;text-align:center;}
+.es-sub{font-size:12px;color:#8a9e8a;text-align:center;margin-top:6px;line-height:1.7;padding:0 10px;}
+.es-btn{background:#1B5E38;color:#fff;font-size:12px;font-weight:700;border-radius:14px;padding:12px 28px;margin-top:20px;}
+.es-ghost{color:#1B5E38;font-size:12px;font-weight:600;margin-top:10px;}
+/* empty variants preview */
+.es-tabs{display:flex;gap:6px;padding:10px 12px 0;}
+.est{padding:5px 11px;border-radius:20px;font-size:10px;font-weight:600;}
+.est-on{background:#1B5E38;color:#fff;}
+.est-off{background:#fff;color:#7a8e7a;border:1.5px solid #E0E8DC;}
+/* mini empty cards row */
+.mini-empties{display:flex;gap:8px;padding:12px 12px 0;}
+.me-card{flex:1;background:#fff;border-radius:14px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid #E8EDE8;}
+.me-icon{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;}
+.mei-g{background:#EBF5EE;}
+.mei-b{background:#E6F0FB;}
+.mei-o{background:#FFF3E0;}
+.me-icon svg{width:18px;height:18px;fill:none;stroke-width:1.8;stroke-linecap:round;}
+.me-lbl{font-size:10px;font-weight:600;color:#aaa;text-align:center;}
+</style>
+
+<div class="wrap">
+
+  <!-- ══ LOGIN ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen login-screen">
+        <div class="login-hero">
+          <div class="lh-sbar"><span>9:41</span><span>▲▲ ▬</span></div>
+          <div class="logo-ring">
+            <div class="logo-inner">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+          </div>
+          <div class="lh-name">Nexus</div>
+          <div class="lh-sub">منصة الطلاب المبدعين</div>
+        </div>
+        <div class="login-wave"><svg viewBox="0 0 232 26" preserveAspectRatio="none"><path d="M0 26 Q58 0 116 16 Q174 26 232 6 L232 26 Z" fill="#F2F4F0"/></svg></div>
+
+        <div style="padding:0 14px;margin-top:-14px;">
+          <div class="login-card">
+            <div class="lc-title">تسجيل الدخول</div>
+            <div class="field-g">
+              <div class="fl">البريد الإلكتروني</div>
+              <div class="fi act">
+                <div class="fi-icon fii-g"><svg class="svg-g" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><polyline points="2,7 12,14 22,7"/></svg></div>
+                <div class="fi-val">ahmed@zu.edu.jo</div>
+              </div>
+            </div>
+            <div class="field-g">
+              <div class="fl">كلمة المرور</div>
+              <div class="fi">
+                <div class="fi-icon fii-gr"><svg class="svg-gr" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+                <div class="fi-ph fi-val" style="letter-spacing:3px;">••••••••</div>
+              </div>
+            </div>
+            <div class="forgot">نسيت كلمة المرور؟</div>
+            <div class="login-btn">
+              <span>دخول</span>
+              <div class="lb-arr">←</div>
+            </div>
+            <div class="login-divider">
+              <div class="ld-line"></div>
+              <div class="ld-txt">أو</div>
+              <div class="ld-line"></div>
+            </div>
+            <div class="signup-row">ما عندك حساب؟ <span>إنشاء حساب جديد</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lbl">تسجيل الدخول</div>
+  </div>
+
+  <!-- ══ CONTEST DETAILS ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen">
+        <div class="contest-hero">
+          <div class="ch-sbar"><span>9:41</span><span>▲▲ ▬</span></div>
+          <div class="ch-nav">
+            <div class="ch-bk"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
+            <div class="ch-type">مسابقة</div>
+            <div class="ch-back"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
+          </div>
+          <div class="ct-title">تحدي الابتكار<br>وريادة الأعمال</div>
+          <div class="ct-org">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>جامعة الزيتونة • كلية الأعمال</span>
+          </div>
+          <div class="deadline-banner">
+            <div class="db-days">20 يوم</div>
+            <div class="db-left">
+              <div class="db-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div class="db-txt">ينتهي التسجيل</div>
+            </div>
+          </div>
+        </div>
+        <div class="cwave"><svg viewBox="0 0 232 26" preserveAspectRatio="none"><path d="M0 26 Q58 0 116 16 Q174 26 232 6 L232 26 Z" fill="#F2F4F0"/></svg></div>
+
+        <div class="c-stats">
+          <div class="cs">
+            <div class="cs-icon csi-b"><svg class="svg-b" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="cs-val">3–5</div><div class="cs-lbl">فريق</div>
+          </div>
+          <div class="cs">
+            <div class="cs-icon csi-o"><svg class="svg-o" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="cs-val">5000₪</div><div class="cs-lbl">الجائزة</div>
+          </div>
+          <div class="cs">
+            <div class="cs-icon csi-g"><svg class="svg-g" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            <div class="cs-val">24</div><div class="cs-lbl">مسجّل</div>
+          </div>
+        </div>
+
+        <div class="c-tabs">
+          <div class="c-tab">القواعد</div>
+          <div class="c-tab on">التفاصيل</div>
+          <div class="c-tab">الجوائز</div>
+        </div>
+
+        <div class="card">
+          <div class="sec-lbl">الجوائز</div>
+          <div class="prize-row">
+            <div class="pr-val">5,000₪</div>
+            <div class="pr-place"><div class="pr-medal pm-gold">🥇</div><div class="pr-name">المركز الأول</div></div>
+          </div>
+          <div class="prize-row">
+            <div class="pr-val">3,000₪</div>
+            <div class="pr-place"><div class="pr-medal pm-silver">🥈</div><div class="pr-name">المركز الثاني</div></div>
+          </div>
+          <div class="prize-row" style="margin-bottom:0;">
+            <div class="pr-val">1,500₪</div>
+            <div class="pr-place"><div class="pr-medal pm-bronze">🥉</div><div class="pr-name">المركز الثالث</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="sec-lbl">الشروط</div>
+          <div class="rule-item"><div class="rule-dot"></div><div class="rule-txt">يجب أن يكون جميع الأعضاء طلاباً مسجلين في الجامعة</div></div>
+          <div class="rule-item"><div class="rule-dot"></div><div class="rule-txt">الحد الأقصى 5 أعضاء لكل فريق</div></div>
+          <div class="rule-item"><div class="rule-dot"></div><div class="rule-txt">يُقدَّم العمل في يونيو 2024</div></div>
+        </div>
+
+        <div class="c-cta">
+          <div class="c-btn-s">شارك</div>
+          <div class="c-btn-m">سجّل فريقك</div>
+        </div>
+      </div>
+    </div>
+    <div class="lbl">تفاصيل المسابقة</div>
+  </div>
+
+  <!-- ══ EMPTY STATES ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen empty-screen">
+        <div class="sbar sb-g"><span>9:41</span><span>▲▲ ▬</span></div>
+        <div class="hdr">
+          <div class="hdr-row">
+            <div class="hicon"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
+            <div class="hdr-title">لا توجد نتائج</div>
+            <div style="width:30px;"></div>
+          </div>
+        </div>
+        <div class="wave"><svg viewBox="0 0 232 22" preserveAspectRatio="none"><path d="M0 22 Q58 0 116 13 Q174 22 232 5 L232 22 Z" fill="#F2F4F0"/></svg></div>
+
+        <div class="es-tabs">
+          <span class="est est-on">لا نتائج بحث</span>
+          <span class="est est-off">لا مشاريع</span>
+          <span class="est est-off">لا إشعارات</span>
+        </div>
+
+        <!-- main empty state -->
+        <div class="es-body">
+          <div class="es-illus">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+          <div class="es-title">لا توجد نتائج</div>
+          <div class="es-sub">لم نجد ما تبحث عنه،<br>جرّب كلمات مختلفة أو تصفح الكل</div>
+          <div class="es-btn">استكشف الكل</div>
+          <div class="es-ghost">مسح البحث</div>
+        </div>
+
+        <!-- 3 mini empty state hints -->
+        <div class="mini-empties">
+          <div class="me-card">
+            <div class="me-icon mei-b"><svg class="svg-b" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            <div class="me-lbl">لا فرق بعد</div>
+          </div>
+          <div class="me-card">
+            <div class="me-icon mei-g"><svg class="svg-g" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div class="me-lbl">لا رسائل</div>
+          </div>
+          <div class="me-card">
+            <div class="me-icon mei-o"><svg class="svg-o" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+            <div class="me-lbl">لا إشعارات</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="lbl">Empty States</div>
+  </div>
+
+</div>

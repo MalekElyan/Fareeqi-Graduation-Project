@@ -1,0 +1,378 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;direction:rtl;background:transparent;}
+.wrap{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;padding:24px 8px;}
+.col{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.lbl{font-size:11px;color:#888;}
+.device{width:252px;background:#0a0a0a;border-radius:44px;padding:7px;box-shadow:0 24px 60px rgba(0,0,0,.28),inset 0 0 0 1px #2a2a2a;}
+.ibar{height:14px;display:flex;justify-content:center;align-items:center;}
+.isl{width:68px;height:8px;background:#0a0a0a;border-radius:20px;border:1px solid #222;}
+.screen{border-radius:37px;overflow:hidden;background:#F2F4F0;display:flex;flex-direction:column;min-height:560px;}
+
+/* ── SHARED STATUS BAR ── */
+.sbar{display:flex;justify-content:space-between;font-size:10px;font-weight:700;padding:10px 18px 0;}
+.sbar-gray{background:#F2F4F0;color:#555;}
+.sbar-green{background:#1B5E38;color:rgba(255,255,255,.55);}
+
+/* ════════════════════════════
+   SCREEN 1 — CONVERSATIONS LIST
+════════════════════════════ */
+/* green header */
+.conv-header{background:#1B5E38;padding:8px 16px 22px;position:relative;overflow:hidden;}
+.conv-header::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid rgba(255,255,255,.05);top:-70px;right:-40px;}
+.conv-header::after{content:'';position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.03);bottom:-20px;left:-20px;}
+.ch-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.ch-title{font-size:18px;font-weight:700;color:#fff;}
+.ch-icon{width:32px;height:32px;background:rgba(255,255,255,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.15);}
+.ch-icon svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;}
+
+/* search inside header */
+.conv-search{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:9px 13px;display:flex;align-items:center;gap:8px;margin-top:12px;position:relative;z-index:1;}
+.conv-search svg{width:14px;height:14px;stroke:rgba(255,255,255,.5);fill:none;stroke-width:2;stroke-linecap:round;}
+.conv-search-ph{font-size:12px;color:rgba(255,255,255,.4);}
+
+/* wave */
+.wave{background:#1B5E38;height:24px;}
+.wave svg{width:100%;height:24px;display:block;}
+
+/* filter tabs */
+.conv-tabs{display:flex;gap:6px;padding:10px 14px 0;}
+.ctab{padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;}
+.ctab-on{background:#1B5E38;color:#fff;}
+.ctab-off{background:#fff;color:#7a8e7a;border:1.5px solid #E0E8DC;}
+
+/* conversation list */
+.conv-list{padding:10px 12px 0;display:flex;flex-direction:column;gap:8px;flex:1;}
+
+/* single conversation row */
+.conv-item{background:#fff;border-radius:16px;padding:12px 13px;display:flex;align-items:center;gap:10px;}
+.ci-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;position:relative;}
+.av1{background:#C5E3CE;color:#1B5E38;}
+.av2{background:#B5D4F4;color:#185FA5;}
+.av3{background:#F4C0D1;color:#993556;}
+.av4{background:#FDE8C0;color:#a06000;}
+.ci-online{position:absolute;bottom:1px;left:1px;width:11px;height:11px;border-radius:50%;background:#22c55e;border:2px solid #fff;}
+.ci-body{flex:1;min-width:0;}
+.ci-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;}
+.ci-name{font-size:13px;font-weight:700;color:#0f1e13;}
+.ci-time{font-size:10px;color:#aaa;}
+.ci-preview{font-size:11px;color:#8a9e8a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right;}
+.ci-preview-bold{color:#3a4e3a;font-weight:600;}
+.ci-badge{min-width:18px;height:18px;background:#1B5E38;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;padding:0 5px;flex-shrink:0;}
+
+/* project tag on conv */
+.ci-project-tag{background:#EBF5EE;color:#1B5E38;font-size:9px;font-weight:600;padding:2px 7px;border-radius:8px;border:1px solid #C8E6D0;display:inline-block;margin-top:3px;}
+
+/* bottom nav */
+.bottom-nav{background:#fff;display:flex;justify-content:space-around;padding:8px 0 12px;border-top:1px solid #E8EDE8;margin-top:auto;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.nav-item span{font-size:9px;color:#bbb;}
+.nav-item.active span{color:#1B5E38;}
+.ni svg{width:18px;height:18px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;stroke:#bbb;}
+.ni.active svg{stroke:#1B5E38;}
+.nav-dot{width:4px;height:4px;border-radius:50%;background:#1B5E38;}
+
+/* ════════════════════════════
+   SCREEN 2 — CHAT ROOM
+════════════════════════════ */
+.chat-screen{background:#F2F4F0;}
+
+/* chat header */
+.chat-header{background:#1B5E38;padding:8px 16px 14px;position:relative;overflow:hidden;}
+.chat-header::before{content:'';position:absolute;width:150px;height:150px;border-radius:50%;border:1px solid rgba(255,255,255,.05);top:-60px;right:-30px;}
+.chat-top{display:flex;align-items:center;gap:10px;position:relative;z-index:1;}
+.chat-back{width:30px;height:30px;background:rgba(255,255,255,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.15);flex-shrink:0;}
+.chat-back svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;}
+.chat-av{width:38px;height:38px;border-radius:50%;background:#C5E3CE;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#1B5E38;flex-shrink:0;border:2px solid rgba(255,255,255,.3);}
+.chat-info{flex:1;}
+.chat-name{font-size:13px;font-weight:700;color:#fff;}
+.chat-status{font-size:10px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:4px;margin-top:2px;}
+.online-dot{width:6px;height:6px;border-radius:50%;background:#6adb8a;}
+.chat-more{width:30px;height:30px;background:rgba(255,255,255,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.15);}
+.chat-more svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;}
+
+/* project context banner */
+.proj-banner{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:6px 12px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.pb-left{display:flex;align-items:center;gap:6px;}
+.pb-icon{width:22px;height:22px;background:rgba(255,255,255,.15);border-radius:6px;display:flex;align-items:center;justify-content:center;}
+.pb-icon svg{width:11px;height:11px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;}
+.pb-name{font-size:10px;font-weight:600;color:rgba(255,255,255,.8);}
+.pb-arrow{font-size:11px;color:rgba(255,255,255,.4);}
+
+/* messages area */
+.msgs{flex:1;padding:12px 12px 8px;display:flex;flex-direction:column;gap:8px;overflow:hidden;}
+
+/* date divider */
+.date-div{text-align:center;font-size:10px;color:#aaa;display:flex;align-items:center;gap:8px;margin:4px 0;}
+.date-div::before,.date-div::after{content:'';flex:1;height:1px;background:#E0E8DC;}
+
+/* message bubbles */
+.msg-row{display:flex;align-items:flex-end;gap:6px;}
+.msg-row.mine{flex-direction:row-reverse;}
+.msg-av-sm{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;}
+.mav-green{background:#C5E3CE;color:#1B5E38;}
+.mav-blue{background:#B5D4F4;color:#185FA5;}
+
+.bubble{max-width:150px;padding:9px 12px;border-radius:16px;font-size:11px;line-height:1.55;}
+.bubble-other{background:#fff;color:#1a2e1a;border-radius:16px 16px 16px 4px;}
+.bubble-mine{background:#1B5E38;color:#fff;border-radius:16px 16px 4px 16px;}
+.bubble-time{font-size:9px;margin-top:4px;text-align:left;}
+.bt-other{color:#aaa;}
+.bt-mine{color:rgba(255,255,255,.6);}
+
+/* file/image bubble */
+.bubble-file{background:#fff;border-radius:14px;padding:9px 12px;display:flex;align-items:center;gap:8px;max-width:160px;}
+.bf-icon{width:32px;height:32px;background:#EBF5EE;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.bf-icon svg{width:15px;height:15px;stroke:#1B5E38;fill:none;stroke-width:2;stroke-linecap:round;}
+.bf-info{}
+.bf-name{font-size:10px;font-weight:600;color:#0f1e13;}
+.bf-size{font-size:9px;color:#aaa;margin-top:1px;}
+
+/* typing indicator */
+.typing-bubble{background:#fff;border-radius:16px 16px 16px 4px;padding:10px 14px;display:flex;gap:4px;align-items:center;width:fit-content;}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:#C8D4C8;}
+
+/* input bar */
+.chat-input{background:#fff;padding:10px 12px;display:flex;align-items:center;gap:8px;border-top:1px solid #E8EDE8;}
+.ci-attach{width:32px;height:32px;background:#F2F4F0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ci-attach svg{width:15px;height:15px;stroke:#888;fill:none;stroke-width:2;stroke-linecap:round;}
+.ci-text{flex:1;background:#F2F4F0;border-radius:20px;padding:8px 13px;font-size:12px;color:#C0CCBA;text-align:right;}
+.ci-send{width:34px;height:34px;background:#1B5E38;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ci-send svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;}
+</style>
+
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;">صفحتا المحادثات والشات</h2>
+
+<div class="wrap">
+
+  <!-- ══ SCREEN 1: CONVERSATIONS LIST ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen">
+
+        <div class="sbar sbar-green"><span>9:41</span><span>▲▲ ▬</span></div>
+
+        <div class="conv-header">
+          <div class="ch-top">
+            <div class="ch-icon">
+              <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+            </div>
+            <div class="ch-title">المحادثات</div>
+            <div class="ch-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="12" y1="8" x2="12" y2="14"/><line x1="9" y1="11" x2="15" y2="11"/></svg>
+            </div>
+          </div>
+          <div class="conv-search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span class="conv-search-ph">ابحث في المحادثات...</span>
+          </div>
+        </div>
+        <div class="wave">
+          <svg viewBox="0 0 252 24" preserveAspectRatio="none"><path d="M0 24 Q63 0 126 14 Q189 24 252 6 L252 24 Z" fill="#F2F4F0"/></svg>
+        </div>
+
+        <!-- tabs -->
+        <div class="conv-tabs">
+          <span class="ctab ctab-on">الكل</span>
+          <span class="ctab ctab-off">فرق</span>
+          <span class="ctab ctab-off">مباشر</span>
+        </div>
+
+        <!-- list -->
+        <div class="conv-list">
+
+          <div class="conv-item">
+            <div class="ci-badge">3</div>
+            <div class="ci-body">
+              <div class="ci-top">
+                <span class="ci-time">الآن</span>
+                <span class="ci-name">ليلى حسن</span>
+              </div>
+              <div class="ci-preview ci-preview-bold">تمام، أشوفك الساعة 3 🙌</div>
+              <span class="ci-project-tag">تحدي الابتكار</span>
+            </div>
+            <div class="ci-av av1">
+              ل
+              <div class="ci-online"></div>
+            </div>
+          </div>
+
+          <div class="conv-item">
+            <div style="width:18px;flex-shrink:0;"></div>
+            <div class="ci-body">
+              <div class="ci-top">
+                <span class="ci-time">10:24</span>
+                <span class="ci-name">فريق نظام الحافلات</span>
+              </div>
+              <div class="ci-preview">محمد: رفعت الكود على GitHub ✅</div>
+              <span class="ci-project-tag">مشروع برمجي</span>
+            </div>
+            <div class="ci-av av2" style="font-size:11px;font-weight:700;">فر</div>
+          </div>
+
+          <div class="conv-item">
+            <div class="ci-badge" style="background:#E8EDE8;color:#5a6e5a;">1</div>
+            <div class="ci-body">
+              <div class="ci-top">
+                <span class="ci-time">أمس</span>
+                <span class="ci-name">محمد علي</span>
+              </div>
+              <div class="ci-preview">أنت: شكراً على المساعدة!</div>
+              <span class="ci-project-tag">طلب انضمام</span>
+            </div>
+            <div class="ci-av av4">م</div>
+          </div>
+
+          <div class="conv-item">
+            <div style="width:18px;flex-shrink:0;"></div>
+            <div class="ci-body">
+              <div class="ci-top">
+                <span class="ci-time">الاثنين</span>
+                <span class="ci-name">رنا خالد</span>
+              </div>
+              <div class="ci-preview">حسناً سأرسل التصاميم قريباً</div>
+            </div>
+            <div class="ci-av av3">ر</div>
+          </div>
+
+        </div>
+
+        <!-- bottom nav -->
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="ni"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span>ملفي</span></div>
+          <div class="nav-item active">
+            <div class="ni active"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <span>محادثات</span>
+            <div class="nav-dot"></div>
+          </div>
+          <div class="nav-item"><div class="ni"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div><span>إنشاء</span></div>
+          <div class="nav-item"><div class="ni"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><span>استكشف</span></div>
+          <div class="nav-item"><div class="ni"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><span>الرئيسية</span></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="lbl">قائمة المحادثات</div>
+  </div>
+
+  <!-- ══ SCREEN 2: CHAT ROOM ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen chat-screen">
+
+        <div class="sbar sbar-green"><span>9:41</span><span>▲▲ ▬</span></div>
+
+        <!-- chat header -->
+        <div class="chat-header">
+          <div class="chat-top">
+            <div class="chat-more">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </div>
+            <div class="chat-info">
+              <div class="chat-name">ليلى حسن</div>
+              <div class="chat-status"><div class="online-dot"></div>متصلة الآن</div>
+            </div>
+            <div class="chat-av">ل</div>
+            <div class="chat-back">
+              <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+          </div>
+          <!-- project context -->
+          <div class="proj-banner">
+            <span class="pb-arrow">›</span>
+            <div class="pb-left">
+              <div class="pb-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+              <span class="pb-name">تحدي الابتكار وريادة الأعمال</span>
+            </div>
+          </div>
+        </div>
+        <div class="wave" style="background:#1B5E38;">
+          <svg viewBox="0 0 252 24" preserveAspectRatio="none"><path d="M0 24 Q63 0 126 14 Q189 24 252 6 L252 24 Z" fill="#F2F4F0"/></svg>
+        </div>
+
+        <!-- messages -->
+        <div class="msgs">
+
+          <div class="date-div">اليوم</div>
+
+          <!-- other message -->
+          <div class="msg-row">
+            <div class="msg-av-sm mav-green">ل</div>
+            <div>
+              <div class="bubble bubble-other">مرحباً أحمد! شفت طلب انضمامك للمشروع 👋</div>
+              <div class="bubble-time bt-other">10:02</div>
+            </div>
+          </div>
+
+          <!-- mine -->
+          <div class="msg-row mine">
+            <div>
+              <div class="bubble bubble-mine">أهلاً ليلى! آه بدي أنضم للفريق</div>
+              <div class="bubble-time bt-mine">10:04</div>
+            </div>
+          </div>
+
+          <!-- file bubble -->
+          <div class="msg-row">
+            <div class="msg-av-sm mav-green">ل</div>
+            <div>
+              <div class="bubble-file">
+                <div class="bf-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                <div class="bf-info">
+                  <div class="bf-name">project_brief.pdf</div>
+                  <div class="bf-size">2.4 MB</div>
+                </div>
+              </div>
+              <div class="bubble-time bt-other">10:06</div>
+            </div>
+          </div>
+
+          <!-- mine -->
+          <div class="msg-row mine">
+            <div>
+              <div class="bubble bubble-mine">تمام، راجعت الملف. متحمس أشتغل معكم! 🔥</div>
+              <div class="bubble-time bt-mine">10:20</div>
+            </div>
+          </div>
+
+          <!-- other -->
+          <div class="msg-row">
+            <div class="msg-av-sm mav-green">ل</div>
+            <div>
+              <div class="bubble bubble-other">تمام، أشوفك الساعة 3 🙌</div>
+              <div class="bubble-time bt-other">10:24</div>
+            </div>
+          </div>
+
+          <!-- typing -->
+          <div class="msg-row">
+            <div class="msg-av-sm mav-green">ل</div>
+            <div class="typing-bubble">
+              <div class="typing-dot" style="background:#1B5E38;opacity:.9;"></div>
+              <div class="typing-dot" style="background:#1B5E38;opacity:.6;"></div>
+              <div class="typing-dot" style="background:#1B5E38;opacity:.3;"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- input bar -->
+        <div class="chat-input">
+          <div class="ci-send">
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </div>
+          <div class="ci-text">اكتب رسالة...</div>
+          <div class="ci-attach">
+            <svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="lbl">صفحة الشات</div>
+  </div>
+
+</div>

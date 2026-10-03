@@ -1,0 +1,417 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;direction:rtl;background:transparent;}
+.wrap{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;padding:24px 8px;}
+.col{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.lbl{font-size:11px;color:#888;letter-spacing:.3px;}
+.device{width:232px;background:#0a0a0a;border-radius:42px;padding:6px;box-shadow:0 20px 50px rgba(0,0,0,.28),inset 0 0 0 1px #2a2a2a;}
+.ibar{height:13px;display:flex;justify-content:center;align-items:center;}
+.isl{width:64px;height:7px;background:#0a0a0a;border-radius:20px;border:1px solid #222;}
+.screen{border-radius:35px;overflow:hidden;background:#F2F4F0;min-height:530px;display:flex;flex-direction:column;}
+
+/* SHARED */
+.sbar{display:flex;justify-content:space-between;font-size:10px;font-weight:700;padding:9px 16px 0;background:#1B5E38;color:rgba(255,255,255,.5);}
+.top-band{background:#1B5E38;padding:8px 15px 20px;position:relative;overflow:hidden;}
+.top-band::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid rgba(255,255,255,.05);top:-70px;right:-40px;}
+.top-band::after{content:'';position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.03);bottom:-20px;left:-20px;}
+.tb-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.tb-title{font-size:16px;font-weight:700;color:#fff;}
+.tb-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;position:relative;z-index:1;}
+.hicon{width:30px;height:30px;background:rgba(255,255,255,.12);border-radius:9px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.14);}
+.hicon svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;}
+.wave{background:#1B5E38;height:22px;}
+.wave svg{width:100%;height:22px;display:block;}
+.card{background:#fff;border-radius:14px;margin:0 12px 9px;padding:13px;}
+.sec-lbl{font-size:10px;font-weight:700;color:#1B5E38;letter-spacing:.5px;margin-bottom:8px;text-align:right;}
+
+/* status badge */
+.sbadge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;}
+.sb-active{background:#EBF5EE;color:#1B5E38;border:1px solid #C8E6D0;}
+.sb-white{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.25);}
+
+/* bottom nav */
+.bnav{background:#fff;display:flex;justify-content:space-around;padding:8px 0 12px;border-top:1px solid #E8EDE8;margin-top:auto;}
+.bni{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.bni span{font-size:9px;color:#bbb;}
+.bni.active span{color:#1B5E38;}
+.bni svg{width:18px;height:18px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;stroke:#bbb;}
+.bni.active svg{stroke:#1B5E38;}
+.bnav-dot{width:4px;height:4px;border-radius:50%;background:#1B5E38;}
+
+/* ══════════════
+   SCREEN 1 — فرقي
+══════════════ */
+.s1{background:#F2F4F0;}
+
+/* team cards */
+.team-card{background:#fff;border-radius:14px;margin:0 12px 9px;overflow:hidden;border:1px solid rgba(0,0,0,.04);}
+.tc-hero{padding:12px 13px 10px;position:relative;overflow:hidden;}
+.tch-green{background:#1B5E38;}
+.tch-dark{background:#0d4a2a;}
+.tc-hero::before{content:'';position:absolute;width:120px;height:120px;border-radius:50%;border:1px solid rgba(255,255,255,.06);top:-40px;right:-30px;}
+.tc-top{display:flex;align-items:flex-start;justify-content:space-between;position:relative;z-index:1;margin-bottom:8px;}
+.tc-icon{width:32px;height:32px;background:rgba(255,255,255,.14);border-radius:9px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);}
+.tc-icon svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;}
+.tc-name{font-size:13px;font-weight:700;color:#fff;line-height:1.3;position:relative;z-index:1;}
+.tc-code{font-size:9px;color:rgba(255,255,255,.5);margin-top:2px;position:relative;z-index:1;}
+.tc-body{padding:10px 13px 12px;}
+.tc-stats-row{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.tc-stat{display:flex;align-items:center;gap:5px;}
+.tc-stat-ic{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;}
+.tsi-g{background:#EBF5EE;}
+.tsi-o{background:#FFF8E6;}
+.tc-stat-ic svg{width:11px;height:11px;fill:none;stroke-width:2.2;stroke-linecap:round;}
+.svg-g{stroke:#1B5E38;}
+.svg-o{stroke:#d4880a;}
+.tc-stat-val{font-size:12px;font-weight:700;color:#0f1e13;}
+.tc-stat-lbl{font-size:10px;color:#aaa;}
+.tc-role{font-size:10px;color:#8a9e8a;margin-right:auto;}
+.tc-avs{display:flex;margin-bottom:10px;}
+.tc-av{width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-left:-6px;}
+.tav1{background:#C5E3CE;color:#1B5E38;}
+.tav2{background:#B5D4F4;color:#185FA5;}
+.tav3{background:#F4C0D1;color:#993556;}
+.tav4{background:#FDE8C0;color:#a06000;}
+.tav-m{background:#F0F4F0;color:#888;}
+.tc-footer{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid #F4F6F0;}
+.tc-date{font-size:10px;color:#aaa;display:flex;align-items:center;gap:4px;}
+.tc-date svg{width:11px;height:11px;stroke:#C0CCBA;fill:none;stroke-width:2;stroke-linecap:round;}
+.tc-btn{display:flex;align-items:center;gap:4px;background:#EBF5EE;color:#1B5E38;font-size:10px;font-weight:700;padding:6px 12px;border-radius:9px;border:1px solid #C8E6D0;}
+.tc-btn svg{width:11px;height:11px;stroke:#1B5E38;fill:none;stroke-width:2;stroke-linecap:round;}
+
+/* ══════════════
+   SCREEN 2 — تفاصيل الفريق
+══════════════ */
+.s2{background:#F2F4F0;}
+.dm-hero{background:#1B5E38;padding:10px 15px 16px;position:relative;overflow:hidden;}
+.dm-hero::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid rgba(255,255,255,.05);top:-70px;right:-40px;}
+.dm-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;margin-bottom:8px;}
+.dm-back{width:28px;height:28px;background:rgba(255,255,255,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);}
+.dm-back svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;}
+.dm-more{width:28px;height:28px;background:rgba(255,255,255,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);}
+.dm-more svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;}
+.dm-id{font-size:10px;color:rgba(255,255,255,.4);font-family:monospace;}
+.dm-title{font-size:17px;font-weight:700;color:#fff;line-height:1.3;position:relative;z-index:1;}
+.dm-spec{display:flex;align-items:center;gap:5px;margin-top:4px;position:relative;z-index:1;}
+.dm-spec svg{width:11px;height:11px;stroke:rgba(255,255,255,.5);fill:none;stroke-width:2;stroke-linecap:round;}
+.dm-spec span{font-size:10px;color:rgba(255,255,255,.55);}
+
+/* quick links */
+.ql-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#F6F8F4;border-radius:12px;border:1px solid #E0E8DC;margin-bottom:8px;}
+.ql-right{display:flex;align-items:center;gap:8px;}
+.ql-icon{width:30px;height:30px;background:#F0F0EE;border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.ql-icon svg{width:13px;height:13px;stroke:#444;fill:none;stroke-width:2;stroke-linecap:round;}
+.ql-name{font-size:12px;font-weight:600;color:#0f1e13;}
+.ql-sub{font-size:9px;color:#aaa;margin-top:1px;}
+.ql-arrow{font-size:14px;color:#C0CCBA;}
+
+/* members */
+.member-row{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;background:#F6F8F4;border-radius:11px;border:1px solid #E8EDE8;margin-bottom:7px;}
+.mr-right{display:flex;align-items:center;gap:8px;}
+.mr-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+.mav1{background:#C5E3CE;color:#1B5E38;}
+.mav2{background:#B5D4F4;color:#185FA5;}
+.mr-name{font-size:12px;font-weight:600;color:#0f1e13;}
+.mr-role{font-size:10px;color:#8a9e8a;margin-top:1px;}
+.leader-badge{background:#FFF8E6;color:#d4880a;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;border:1px solid #FFE8A0;}
+
+/* action btns */
+.act-row{display:flex;gap:8px;padding:0 12px 12px;}
+.act-main{flex:2;background:#1B5E38;color:#fff;font-size:11px;font-weight:700;border-radius:12px;padding:10px 0;text-align:center;display:flex;align-items:center;justify-content:center;gap:5px;}
+.act-main svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;}
+.act-danger{flex:1;background:#FEF0F0;color:#c0392b;font-size:11px;font-weight:700;border-radius:12px;padding:10px 0;text-align:center;border:1.5px solid #FACCCA;}
+
+/* ══════════════
+   SCREEN 3 — قائمة المهام
+══════════════ */
+.s3{background:#F2F4F0;}
+
+/* progress */
+.prog-card{background:#fff;border-radius:14px;margin:0 12px 9px;padding:13px;}
+.pc-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.pc-title{font-size:12px;font-weight:700;color:#0f1e13;}
+.pc-pct{font-size:14px;font-weight:700;color:#1B5E38;}
+.prog-bar{height:6px;background:#F0F4F0;border-radius:6px;overflow:hidden;}
+.prog-fill{height:100%;background:#1B5E38;border-radius:6px;}
+.pc-meta{display:flex;justify-content:space-between;margin-top:5px;}
+.pc-meta span{font-size:10px;color:#aaa;}
+.pc-meta strong{color:#1B5E38;}
+
+/* add task */
+.add-row{display:flex;align-items:center;gap:8px;padding:0 12px 9px;}
+.add-input{flex:1;background:#fff;border:1.5px solid #1B5E38;border-radius:12px;padding:9px 13px;font-size:12px;color:#C0CCBA;text-align:right;}
+.add-btn{background:#1B5E38;color:#fff;font-size:11px;font-weight:700;border-radius:12px;padding:9px 14px;white-space:nowrap;}
+
+/* tabs */
+.tab-row{display:flex;gap:0;margin:0 12px 9px;background:#fff;border-radius:12px;padding:3px;border:1px solid #E8EDE8;}
+.tab{flex:1;text-align:center;font-size:10px;padding:6px 0;border-radius:9px;color:#aaa;font-weight:500;}
+.tab.on{background:#1B5E38;color:#fff;font-weight:700;}
+
+/* todo items */
+.todo-list{padding:0 12px;display:flex;flex-direction:column;gap:7px;flex:1;}
+.todo-item{background:#fff;border-radius:13px;padding:11px 13px;display:flex;align-items:center;justify-content:space-between;border:1px solid #E8EDE8;}
+.ti-right{display:flex;align-items:center;gap:9px;}
+.checkbox{width:20px;height:20px;border-radius:6px;border:2px solid #C8E6D0;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.checkbox.done{background:#1B5E38;border-color:#1B5E38;}
+.checkbox.done svg{width:10px;height:10px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;}
+.ti-text{font-size:12px;font-weight:500;color:#0f1e13;}
+.ti-text.done{color:#C0CCBA;text-decoration:line-through;}
+.del-btn{width:26px;height:26px;background:#FEF0F0;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.del-btn svg{width:11px;height:11px;stroke:#c0392b;fill:none;stroke-width:2;stroke-linecap:round;}
+</style>
+
+<div class="wrap">
+
+  <!-- ══ SCREEN 1: فرقي ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen s1">
+        <div class="sbar"><span>9:41</span><span>▲▲ ▬</span></div>
+        <div class="top-band">
+          <div class="tb-row">
+            <div class="hicon"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
+            <div>
+              <div class="tb-title">فرقي</div>
+              <div class="tb-sub">متابعة مشاريعك الجامعية</div>
+            </div>
+            <div class="hicon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+        </div>
+        <div class="wave"><svg viewBox="0 0 232 22" preserveAspectRatio="none"><path d="M0 22 Q58 0 116 13 Q174 22 232 5 L232 22 Z" fill="#F2F4F0"/></svg></div>
+
+        <!-- team card 1 -->
+        <div class="team-card">
+          <div class="tc-hero tch-green">
+            <div class="tc-top">
+              <div class="sbadge sb-white">● نشط</div>
+              <div class="tc-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            </div>
+            <div class="tc-name">AI-Based Code Reviewer</div>
+            <div class="tc-code">كود الفريق: 11</div>
+          </div>
+          <div class="tc-body">
+            <div class="tc-stats-row">
+              <div class="tc-stat">
+                <div class="tc-stat-ic tsi-o"><svg class="svg-o" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div><div class="tc-stat-val">0</div><div class="tc-stat-lbl">نقاط</div></div>
+              </div>
+              <div class="tc-stat">
+                <div class="tc-stat-ic tsi-g"><svg class="svg-g" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <div><div class="tc-stat-val">5</div><div class="tc-stat-lbl">أعضاء</div></div>
+              </div>
+              <div class="tc-role">subscriber</div>
+            </div>
+            <div class="tc-avs">
+              <div class="tc-av tav1">أ</div>
+              <div class="tc-av tav2">م</div>
+              <div class="tc-av tav3">ر</div>
+              <div class="tc-av tav4">ن</div>
+              <div class="tc-av tav-m">+1</div>
+            </div>
+            <div class="tc-footer">
+              <div class="tc-date"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>آخر تحديث: 1/1/1</div>
+              <div class="tc-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>التفاصيل</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- team card 2 -->
+        <div class="team-card">
+          <div class="tc-hero tch-dark">
+            <div class="tc-top">
+              <div class="sbadge sb-white">● نشط</div>
+              <div class="tc-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+            </div>
+            <div class="tc-name">Smart Study Planner App</div>
+            <div class="tc-code">كود الفريق: 10</div>
+          </div>
+          <div class="tc-body">
+            <div class="tc-stats-row">
+              <div class="tc-stat">
+                <div class="tc-stat-ic tsi-o"><svg class="svg-o" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div><div class="tc-stat-val">4.6</div><div class="tc-stat-lbl">تقييم</div></div>
+              </div>
+              <div class="tc-stat">
+                <div class="tc-stat-ic tsi-g"><svg class="svg-g" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <div><div class="tc-stat-val">3</div><div class="tc-stat-lbl">أعضاء</div></div>
+              </div>
+              <div class="tc-role">subscriber</div>
+            </div>
+            <div class="tc-avs">
+              <div class="tc-av tav1">ف</div>
+              <div class="tc-av tav2">ر</div>
+              <div class="tc-av tav3">م</div>
+            </div>
+            <div class="tc-footer">
+              <div class="tc-date"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>آخر تحديث: 1/1/1</div>
+              <div class="tc-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>التفاصيل</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bnav">
+          <div class="bni"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>ملفي</span></div>
+          <div class="bni"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>محادثات</span></div>
+          <div class="bni"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg><span>إنشاء</span></div>
+          <div class="bni"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>استكشف</span></div>
+          <div class="bni active"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>الرئيسية</span><div class="bnav-dot"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="lbl">فرقي</div>
+  </div>
+
+  <!-- ══ SCREEN 2: تفاصيل الفريق ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen s2">
+        <div class="sbar"><span>9:41</span><span>▲▲ ▬</span></div>
+        <div class="dm-hero">
+          <div class="dm-top">
+            <div class="dm-more"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div>
+            <div class="dm-id">ID: 10</div>
+            <div class="dm-back"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin:8px 0 6px;position:relative;z-index:1;">
+            <div class="sbadge sb-white">● نشط</div>
+          </div>
+          <div class="dm-title">Smart Study Planner App</div>
+          <div class="dm-spec">
+            <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span>grade Project • تخصص</span>
+          </div>
+        </div>
+        <div class="wave"><svg viewBox="0 0 232 22" preserveAspectRatio="none"><path d="M0 22 Q58 0 116 13 Q174 22 232 5 L232 22 Z" fill="#F2F4F0"/></svg></div>
+
+        <!-- description -->
+        <div class="card">
+          <div class="sec-lbl">وصف المشروع</div>
+          <div style="font-size:11px;color:#5a6e5a;line-height:1.7;text-align:right;">A web and mobile application that helps students organize their study schedule, track progress, and collaborate on academic projects.</div>
+        </div>
+
+        <!-- quick links -->
+        <div class="card">
+          <div class="sec-lbl">روابط سريعة</div>
+          <div class="ql-row">
+            <div class="ql-arrow">‹</div>
+            <div class="ql-right">
+              <div>
+                <div class="ql-name">مستودع الكود (GitHub)</div>
+                <div class="ql-sub">مشاهدة الكود المصدري</div>
+              </div>
+              <div class="ql-icon"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- members -->
+        <div class="card">
+          <div class="sec-lbl">أعضاء الفريق (2)</div>
+          <div class="member-row">
+            <div class="leader-badge">قائد الفريق</div>
+            <div class="mr-right">
+              <div><div class="mr-name">rana Ali</div><div class="mr-role">مدير الفريق</div></div>
+              <div class="mr-av mav2">ر</div>
+            </div>
+          </div>
+          <div class="member-row" style="margin-bottom:0;">
+            <div style="font-size:9px;color:#8a9e8a;background:#F4F4F2;padding:3px 9px;border-radius:20px;border:1px solid #E4E4E0;">عضو فريق</div>
+            <div class="mr-right">
+              <div><div class="mr-name">fuad hdaib</div><div class="mr-role">عضو فريق</div></div>
+              <div class="mr-av mav1">ف</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="act-row">
+          <div class="act-danger">مغادرة</div>
+          <div class="act-main"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>قائمة مهام الفريق</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="lbl">تفاصيل الفريق</div>
+  </div>
+
+  <!-- ══ SCREEN 3: قائمة المهام ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen s3">
+        <div class="sbar"><span>9:41</span><span>▲▲ ▬</span></div>
+        <div class="top-band">
+          <div class="tb-row">
+            <div class="hicon"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
+            <div>
+              <div class="tb-title">قائمة المهام</div>
+              <div class="tb-sub">Smart Study Planner App</div>
+            </div>
+            <div class="hicon"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
+          </div>
+        </div>
+        <div class="wave"><svg viewBox="0 0 232 22" preserveAspectRatio="none"><path d="M0 22 Q58 0 116 13 Q174 22 232 5 L232 22 Z" fill="#F2F4F0"/></svg></div>
+
+        <!-- progress -->
+        <div class="prog-card">
+          <div class="pc-row">
+            <div class="pc-pct">33%</div>
+            <div class="pc-title">تقدم الفريق</div>
+          </div>
+          <div class="prog-bar"><div class="prog-fill" style="width:33%;"></div></div>
+          <div class="pc-meta"><span>3 مهام</span><span><strong>1 مكتملة</strong></span></div>
+        </div>
+
+        <!-- add -->
+        <div class="add-row">
+          <div class="add-btn">+ إضافة</div>
+          <div class="add-input">أضف مهمة للفريق...</div>
+        </div>
+
+        <!-- tabs -->
+        <div class="tab-row">
+          <div class="tab on">الكل</div>
+          <div class="tab">قيد التنفيذ</div>
+          <div class="tab">مكتملة</div>
+        </div>
+
+        <!-- tasks -->
+        <div class="todo-list">
+          <div class="todo-item">
+            <div class="del-btn"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></div>
+            <div class="ti-right">
+              <div class="checkbox"></div>
+              <div class="ti-text">back end</div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="del-btn"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></div>
+            <div class="ti-right">
+              <div class="checkbox"></div>
+              <div class="ti-text">front End</div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="del-btn"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></div>
+            <div class="ti-right">
+              <div class="checkbox done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="ti-text done">web</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bnav">
+          <div class="bni"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>ملفي</span></div>
+          <div class="bni"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>محادثات</span></div>
+          <div class="bni active"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg><span>إنشاء</span><div class="bnav-dot"></div></div>
+          <div class="bni"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>استكشف</span></div>
+          <div class="bni"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>الرئيسية</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="lbl">قائمة المهام</div>
+  </div>
+
+</div>

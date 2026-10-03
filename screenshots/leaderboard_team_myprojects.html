@@ -1,0 +1,434 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;direction:rtl;background:transparent;}
+.wrap{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;padding:24px 8px;}
+.col{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.lbl{font-size:11px;color:#888;letter-spacing:.3px;}
+.device{width:232px;background:#0a0a0a;border-radius:42px;padding:6px;box-shadow:0 20px 50px rgba(0,0,0,.28),inset 0 0 0 1px #2a2a2a;}
+.ibar{height:13px;display:flex;justify-content:center;align-items:center;}
+.isl{width:64px;height:7px;background:#0a0a0a;border-radius:20px;border:1px solid #222;}
+.screen{border-radius:35px;overflow:hidden;background:#F2F4F0;min-height:530px;display:flex;flex-direction:column;}
+.sbar{display:flex;justify-content:space-between;font-size:10px;font-weight:700;padding:9px 16px 0;background:#1B5E38;color:rgba(255,255,255,.5);}
+
+/* ── SHARED HEADER ── */
+.hdr{background:#1B5E38;padding:8px 15px 20px;position:relative;overflow:hidden;}
+.hdr::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid rgba(255,255,255,.05);top:-70px;right:-40px;}
+.hdr::after{content:'';position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.03);bottom:-20px;left:-20px;}
+.hdr-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.hdr-title{font-size:17px;font-weight:700;color:#fff;}
+.hdr-icon{width:30px;height:30px;background:rgba(255,255,255,.12);border-radius:9px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.14);}
+.hdr-icon svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;}
+.wave{background:#1B5E38;height:22px;}
+.wave svg{width:100%;height:22px;display:block;}
+
+/* tabs */
+.tabs{display:flex;gap:6px;padding:8px 12px 0;}
+.tab{padding:5px 12px;border-radius:20px;font-size:10px;font-weight:600;}
+.ton{background:#1B5E38;color:#fff;}
+.toff{background:#fff;color:#7a8e7a;border:1.5px solid #E0E8DC;}
+
+/* ════════════════
+   SCREEN 1: LEADERBOARD
+════════════════ */
+
+/* my rank banner */
+.my-rank{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:8px 12px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.mr-left{display:flex;align-items:center;gap:8px;}
+.mr-av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;border:2px solid rgba(255,255,255,.3);}
+.mr-info{}
+.mr-name{font-size:11px;font-weight:700;color:#fff;}
+.mr-pts{font-size:10px;color:rgba(255,255,255,.6);}
+.mr-rank{font-size:18px;font-weight:700;color:#fff;display:flex;align-items:baseline;gap:1px;}
+.mr-hash{font-size:11px;color:rgba(255,255,255,.6);}
+
+/* top 3 podium */
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;padding:14px 12px 6px;}
+.pod-item{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.pod-av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;border:3px solid #fff;position:relative;}
+.pod-av.p1{width:56px;height:56px;font-size:18px;background:#C5E3CE;color:#1B5E38;}
+.pod-av.p2{width:44px;height:44px;font-size:14px;background:#B5D4F4;color:#185FA5;}
+.pod-av.p3{width:40px;height:40px;font-size:13px;background:#F4C0D1;color:#993556;}
+.pod-crown{position:absolute;top:-14px;font-size:14px;}
+.pod-name{font-size:10px;font-weight:700;color:#0f1e13;}
+.pod-pts{font-size:9px;color:#1B5E38;font-weight:700;}
+.pod-bar{border-radius:6px 6px 0 0;width:52px;display:flex;align-items:center;justify-content:center;}
+.pb1{height:44px;background:#1B5E38;}
+.pb2{height:32px;background:#4a90d9;}
+.pb3{height:24px;background:#E8A0B4;}
+.pb-num{font-size:11px;font-weight:700;color:#fff;}
+
+/* list rows */
+.lb-list{padding:0 12px;display:flex;flex-direction:column;gap:7px;flex:1;}
+.lb-row{background:#fff;border-radius:12px;padding:9px 11px;display:flex;align-items:center;gap:9px;}
+.lb-row.me{border:1.5px solid #C8E6D0;background:#EBF5EE;}
+.lb-num{font-size:13px;font-weight:700;color:#aaa;width:18px;text-align:center;flex-shrink:0;}
+.lb-num.top{color:#d4880a;}
+.lb-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.lav1{background:#C5E3CE;color:#1B5E38;}
+.lav2{background:#FDE8C0;color:#a06000;}
+.lav3{background:#E8E0FC;color:#534AB7;}
+.lav-me{background:#C5E3CE;color:#1B5E38;}
+.lb-name{font-size:12px;font-weight:600;color:#0f1e13;flex:1;text-align:right;}
+.lb-pts{font-size:11px;font-weight:700;color:#1B5E38;}
+.lb-badge{font-size:8px;font-weight:700;padding:2px 6px;border-radius:8px;}
+.lbg-gold{background:#FFF3CC;color:#a06000;}
+.lbg-me{background:#EBF5EE;color:#1B5E38;border:1px solid #C8E6D0;}
+.lb-arrow{font-size:10px;color:#ccc;}
+
+/* ════════════════
+   SCREEN 2: TEAM PAGE
+════════════════ */
+.team-hdr-extra{margin-top:10px;position:relative;z-index:1;}
+.team-name-row{display:flex;align-items:center;gap:8px;}
+.team-icon{width:36px;height:36px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.2);}
+.team-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;}
+.team-name{font-size:16px;font-weight:700;color:#fff;}
+.team-proj{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px;}
+
+/* team stats row */
+.team-stats{display:flex;gap:8px;margin-top:10px;}
+.ts-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:5px 10px;text-align:center;flex:1;}
+.ts-val{font-size:14px;font-weight:700;color:#fff;}
+.ts-lbl{font-size:9px;color:rgba(255,255,255,.5);}
+
+/* section */
+.tsec{padding:10px 12px 0;}
+.tsec-title{font-size:11px;font-weight:700;color:#1B5E38;text-align:right;margin-bottom:7px;letter-spacing:.4px;}
+
+/* member cards */
+.member-card{background:#fff;border-radius:13px;padding:10px 11px;display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.mc-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;position:relative;}
+.mav-g{background:#C5E3CE;color:#1B5E38;}
+.mav-b{background:#B5D4F4;color:#185FA5;}
+.mav-p{background:#F4C0D1;color:#993556;}
+.mc-online{position:absolute;bottom:1px;left:1px;width:10px;height:10px;border-radius:50%;background:#22c55e;border:2px solid #fff;}
+.mc-body{flex:1;}
+.mc-name{font-size:12px;font-weight:700;color:#0f1e13;text-align:right;}
+.mc-role{font-size:10px;color:#8a9e8a;text-align:right;margin-top:1px;}
+.mc-skills{display:flex;gap:4px;justify-content:flex-end;margin-top:5px;}
+.msk{background:#EBF5EE;color:#1B5E38;font-size:9px;font-weight:600;padding:2px 7px;border-radius:8px;border:1px solid #C8E6D0;}
+.mc-leader{background:#FFF3CC;color:#a06000;font-size:9px;font-weight:700;padding:2px 8px;border-radius:8px;flex-shrink:0;}
+
+/* project card */
+.proj-card{background:#fff;border-radius:13px;padding:11px 12px;margin-bottom:7px;}
+.pc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
+.pc-name{font-size:13px;font-weight:700;color:#0f1e13;}
+.pc-badge{font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;background:#EBF5EE;color:#1B5E38;border:1px solid #C8E6D0;}
+.prog-wrap{margin-top:4px;}
+.prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:#aaa;margin-bottom:4px;}
+.prog-bar{height:5px;background:#F0F4F0;border-radius:5px;overflow:hidden;}
+.prog-fill{height:100%;background:#1B5E38;border-radius:5px;}
+
+/* action row */
+.team-actions{display:flex;gap:7px;padding:0 12px 12px;}
+.ta-btn{flex:1;padding:10px 0;border-radius:12px;font-size:11px;font-weight:700;text-align:center;}
+.ta-main{background:#1B5E38;color:#fff;}
+.ta-sec{background:#EBF5EE;color:#1B5E38;border:1.5px solid #C8E6D0;}
+
+/* ════════════════
+   SCREEN 3: MY PROJECTS
+════════════════ */
+.mp-hdr-extra{margin-top:8px;position:relative;z-index:1;}
+.mp-summary{display:flex;gap:6px;}
+.mp-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:5px 10px;text-align:center;flex:1;}
+.mp-val{font-size:15px;font-weight:700;color:#fff;}
+.mp-lbl{font-size:9px;color:rgba(255,255,255,.5);}
+
+/* project list */
+.mp-list{padding:10px 12px 0;flex:1;}
+.mp-sec{font-size:10px;font-weight:700;color:#AAB4AA;text-align:right;margin-bottom:7px;letter-spacing:.4px;}
+
+.mp-card{background:#fff;border-radius:14px;overflow:hidden;margin-bottom:9px;border:1px solid rgba(0,0,0,.04);}
+.mp-card-hero{padding:11px 12px 10px;position:relative;overflow:hidden;}
+.mph-blue{background:#2563EB;}
+.mph-green{background:#1B5E38;}
+.mph-teal{background:#0F6E56;}
+.mph-gray{background:#4a5e6a;opacity:.7;}
+.mp-card-hero::before{content:'';position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.06);top:-30px;right:-20px;}
+.mph-type{font-size:9px;font-weight:700;padding:3px 8px;border-radius:10px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.2);display:inline-block;margin-bottom:5px;}
+.mph-title{font-size:13px;font-weight:700;color:#fff;position:relative;z-index:1;}
+.mph-date{font-size:9px;color:rgba(255,255,255,.55);margin-top:3px;position:relative;z-index:1;}
+.mp-card-body{padding:9px 12px 10px;}
+.mpb-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.mpb-status{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;}
+.mps-active{background:#EBF5EE;color:#1B5E38;border:1px solid #C8E6D0;}
+.mps-done{background:#F0F0EE;color:#888;border:1px solid #E0E0DC;}
+.mpb-team{font-size:10px;color:#8a9e8a;display:flex;align-items:center;gap:3px;}
+.mpb-team svg{width:11px;height:11px;stroke:#aaa;fill:none;stroke-width:2;}
+.mp-prog-bar{height:4px;background:#F0F4F0;border-radius:4px;overflow:hidden;}
+.mp-prog-fill{height:100%;border-radius:4px;}
+.mpf-green{background:#1B5E38;}
+.mpf-gray{background:#C0CCC0;}
+</style>
+
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;">Leaderboard وصفحة الفريق ومشاريعي</h2>
+
+<div class="wrap">
+
+  <!-- ══ LEADERBOARD ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen">
+        <div class="sbar"><span>9:41</span><span>▲▲ ▬</span></div>
+        <div class="hdr">
+          <div class="hdr-row">
+            <div class="hdr-icon"><svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
+            <div class="hdr-title">لوحة الترتيب</div>
+            <div class="hdr-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          </div>
+          <!-- my rank -->
+          <div class="my-rank">
+            <div class="mr-rank"><span class="mr-hash">#</span>1</div>
+            <div class="mr-left">
+              <div class="mr-av">أ</div>
+              <div class="mr-info">
+                <div class="mr-name">أحمد العتيبي</div>
+                <div class="mr-pts">3200 نقطة</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wave"><svg viewBox="0 0 232 22" preserveAspectRatio="none"><path d="M0 22 Q58 0 116 13 Q174 22 232 5 L232 22 Z" fill="#F2F4F0"/></svg></div>
+
+        <!-- tabs -->
+        <div class="tabs">
+          <span class="tab ton">الجامعة</span>
+          <span class="tab toff">أصدقائي</span>
+          <span class="tab toff">الكلية</span>
+        </div>
+
+        <!-- podium -->
+        <div class="podium">
+          <div class="pod-item">
+            <div class="pod-av p3">ر</div>
+            <div class="pod-name">رنا</div>
+            <div class="pod-pts">2800</div>
+            <div class="pod-bar pb3"><span class="pb-num">3</span></div>
+          </div>
+          <div class="pod-item">
+            <div class="pod-av p1" style="position:relative;">
+              <span class="pod-crown">👑</span>
+              أ
+            </div>
+            <div class="pod-name" style="color:#1B5E38;font-weight:700;">أحمد</div>
+            <div class="pod-pts">3200</div>
+            <div class="pod-bar pb1"><span class="pb-num">1</span></div>
+          </div>
+          <div class="pod-item">
+            <div class="pod-av p2">م</div>
+            <div class="pod-name">محمد</div>
+            <div class="pod-pts">3050</div>
+            <div class="pod-bar pb2"><span class="pb-num">2</span></div>
+          </div>
+        </div>
+
+        <!-- list -->
+        <div class="lb-list">
+          <div class="lb-row me">
+            <div class="lb-num top">1</div>
+            <div class="lb-av lav-me">أ</div>
+            <div class="lb-name">أحمد العتيبي <span style="font-size:9px;color:#1B5E38;">(أنت)</span></div>
+            <div class="lb-pts">3200</div>
+            <span class="lb-badge lbg-me">🏆</span>
+          </div>
+          <div class="lb-row">
+            <div class="lb-num top">2</div>
+            <div class="lb-av lav2">م</div>
+            <div class="lb-name">محمد علي</div>
+            <div class="lb-pts">3050</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-num">3</div>
+            <div class="lb-av lav1">ر</div>
+            <div class="lb-name">رنا خالد</div>
+            <div class="lb-pts">2800</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-num">4</div>
+            <div class="lb-av lav3">س</div>
+            <div class="lb-name">سارة أحمد</div>
+            <div class="lb-pts">2650</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-num">5</div>
+            <div class="lb-av" style="background:#E8E0FC;color:#534AB7;">ن</div>
+            <div class="lb-name">نور حسين</div>
+            <div class="lb-pts">2490</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="lbl">Leaderboard</div>
+  </div>
+
+  <!-- ══ TEAM PAGE ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen">
+        <div class="sbar"><span>9:41</span><span>▲▲ ▬</span></div>
+        <div class="hdr">
+          <div class="hdr-row">
+            <div class="hdr-icon"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
+            <div class="hdr-title">صفحة الفريق</div>
+            <div class="hdr-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div>
+          </div>
+          <div class="team-hdr-extra">
+            <div class="team-name-row">
+              <div class="team-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div>
+                <div class="team-name">فريق المبدعين</div>
+                <div class="team-proj">تحدي الابتكار وريادة الأعمال</div>
+              </div>
+            </div>
+            <div class="team-stats">
+              <div class="ts-pill"><div class="ts-val">3</div><div class="ts-lbl">أعضاء</div></div>
+              <div class="ts-pill"><div class="ts-val">8500</div><div class="ts-lbl">نقاط</div></div>
+              <div class="ts-pill"><div class="ts-val">#2</div><div class="ts-lbl">ترتيب</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="wave"><svg viewBox="0 0 232 22" preserveAspectRatio="none"><path d="M0 22 Q58 0 116 13 Q174 22 232 5 L232 22 Z" fill="#F2F4F0"/></svg></div>
+
+        <!-- members -->
+        <div class="tsec">
+          <div class="tsec-title">الأعضاء</div>
+          <div class="member-card">
+            <span class="mc-leader">قائد</span>
+            <div class="mc-body">
+              <div class="mc-name">أحمد العتيبي</div>
+              <div class="mc-role">مطور Full Stack</div>
+              <div class="mc-skills"><span class="msk">React</span><span class="msk">Node.js</span></div>
+            </div>
+            <div class="mc-av mav-g" style="position:relative;">أ<div class="mc-online"></div></div>
+          </div>
+          <div class="member-card">
+            <div class="mc-body">
+              <div class="mc-name">ليلى حسن</div>
+              <div class="mc-role">مصممة UI/UX</div>
+              <div class="mc-skills"><span class="msk">Figma</span><span class="msk">UI/UX</span></div>
+            </div>
+            <div class="mc-av mav-b">ل</div>
+          </div>
+          <div class="member-card">
+            <div class="mc-body">
+              <div class="mc-name">محمد علي</div>
+              <div class="mc-role">محلل بيانات</div>
+              <div class="mc-skills"><span class="msk">Python</span><span class="msk">ML</span></div>
+            </div>
+            <div class="mc-av mav-p">م</div>
+          </div>
+        </div>
+
+        <!-- linked project -->
+        <div class="tsec">
+          <div class="tsec-title">المشروع المرتبط</div>
+          <div class="proj-card">
+            <div class="pc-top">
+              <span class="pc-badge">نشط</span>
+              <div class="pc-name">تحدي الابتكار</div>
+            </div>
+            <div class="prog-wrap">
+              <div class="prog-lbl"><span>65%</span><span>التقدم</span></div>
+              <div class="prog-bar"><div class="prog-fill" style="width:65%;background:#1B5E38;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-actions">
+          <div class="ta-btn ta-sec">المحادثة</div>
+          <div class="ta-btn ta-main">إدارة الفريق</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="lbl">صفحة الفريق</div>
+  </div>
+
+  <!-- ══ MY PROJECTS ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen">
+        <div class="sbar"><span>9:41</span><span>▲▲ ▬</span></div>
+        <div class="hdr">
+          <div class="hdr-row">
+            <div class="hdr-icon"><svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
+            <div class="hdr-title">مشاريعي</div>
+            <div class="hdr-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="mp-hdr-extra">
+            <div class="mp-summary">
+              <div class="mp-pill"><div class="mp-val">3</div><div class="mp-lbl">نشط</div></div>
+              <div class="mp-pill"><div class="mp-val">2</div><div class="mp-lbl">منتهي</div></div>
+              <div class="mp-pill"><div class="mp-val">5</div><div class="mp-lbl">المجموع</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="wave"><svg viewBox="0 0 232 22" preserveAspectRatio="none"><path d="M0 22 Q58 0 116 13 Q174 22 232 5 L232 22 Z" fill="#F2F4F0"/></svg></div>
+
+        <div class="tabs">
+          <span class="tab ton">الكل</span>
+          <span class="tab toff">مشاريع</span>
+          <span class="tab toff">مسابقات</span>
+        </div>
+
+        <div class="mp-list">
+          <div class="mp-sec" style="margin-top:8px;">النشطة</div>
+
+          <div class="mp-card">
+            <div class="mp-card-hero mph-blue">
+              <span class="mph-type">مشروع</span>
+              <div class="mph-title">نظام تتبع الحافلات</div>
+              <div class="mph-date">فريق المبدعين • 3 أعضاء</div>
+            </div>
+            <div class="mp-card-body">
+              <div class="mpb-row">
+                <div class="mpb-team"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>3 أعضاء</div>
+                <span class="mpb-status mps-active">نشط</span>
+              </div>
+              <div class="mp-prog-bar"><div class="mp-prog-fill mpf-green" style="width:65%;"></div></div>
+            </div>
+          </div>
+
+          <div class="mp-card">
+            <div class="mp-card-hero mph-green">
+              <span class="mph-type">مسابقة</span>
+              <div class="mph-title">تحدي الابتكار</div>
+              <div class="mph-date">ينتهي 20 يونيو 2024</div>
+            </div>
+            <div class="mp-card-body">
+              <div class="mpb-row">
+                <div class="mpb-team"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>4 أعضاء</div>
+                <span class="mpb-status mps-active">نشط</span>
+              </div>
+              <div class="mp-prog-bar"><div class="mp-prog-fill mpf-green" style="width:40%;"></div></div>
+            </div>
+          </div>
+
+          <div class="mp-sec">المنتهية</div>
+          <div class="mp-card" style="opacity:.75;">
+            <div class="mp-card-hero mph-gray">
+              <span class="mph-type">مسابقة</span>
+              <div class="mph-title">هاكاثون الذكاء الاصطناعي</div>
+              <div class="mph-date">انتهى مارس 2024</div>
+            </div>
+            <div class="mp-card-body">
+              <div class="mpb-row">
+                <div style="font-size:10px;color:#d4880a;font-weight:700;">🏅 المركز الثاني</div>
+                <span class="mpb-status mps-done">منتهي</span>
+              </div>
+              <div class="mp-prog-bar"><div class="mp-prog-fill mpf-gray" style="width:100%;"></div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="lbl">مشاريعي</div>
+  </div>
+
+</div>

@@ -1,0 +1,425 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;direction:rtl;background:transparent;}
+.wrap{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;padding:24px 8px;}
+.col{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.lbl{font-size:11px;color:#888;letter-spacing:.3px;}
+.device{width:232px;background:#0a0a0a;border-radius:42px;padding:6px;box-shadow:0 20px 50px rgba(0,0,0,.28),inset 0 0 0 1px #2a2a2a;}
+.ibar{height:13px;display:flex;justify-content:center;align-items:center;}
+.isl{width:64px;height:7px;background:#0a0a0a;border-radius:20px;border:1px solid #222;}
+.screen{border-radius:35px;overflow:hidden;background:#F2F4F0;min-height:530px;display:flex;flex-direction:column;}
+.sbar{display:flex;justify-content:space-between;font-size:10px;font-weight:700;padding:9px 16px 0;}
+.sbar-g{background:#1B5E38;color:rgba(255,255,255,.5);}
+.sbar-w{background:#F2F4F0;color:#888;}
+
+/* shared header */
+.hdr{background:#1B5E38;padding:8px 15px 20px;position:relative;overflow:hidden;}
+.hdr::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid rgba(255,255,255,.05);top:-70px;right:-40px;}
+.hdr::after{content:'';position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.03);bottom:-20px;left:-20px;}
+.hdr-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.hdr-title{font-size:17px;font-weight:700;color:#fff;}
+.hdr-icon{width:30px;height:30px;background:rgba(255,255,255,.12);border-radius:9px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.14);}
+.hdr-icon svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;}
+.wave{background:#1B5E38;height:22px;}
+.wave svg{width:100%;height:22px;display:block;}
+
+/* cards */
+.card{background:#fff;border-radius:14px;margin:0 12px 9px;padding:13px;}
+.sec-lbl{font-size:10px;font-weight:700;color:#1B5E38;letter-spacing:.5px;margin-bottom:8px;text-align:right;}
+
+/* ══════════════════════
+   SCREEN 1 — PROJECT DETAILS
+══════════════════════ */
+/* big hero image area */
+.pd-hero{background:#2563EB;padding:10px 15px 52px;position:relative;overflow:hidden;}
+.pd-hero::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);top:-60px;right:-40px;}
+.pd-hero::after{content:'';position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04);bottom:-20px;left:-20px;}
+.pd-sbar{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:10px;}
+.pd-nav{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+.pd-back{width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.2);}
+.pd-back svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;}
+.pd-bookmark{width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.2);}
+.pd-bookmark svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;}
+.pd-type-badge{background:rgba(255,255,255,.18);color:#fff;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;border:1px solid rgba(255,255,255,.22);}
+.pd-title{font-size:18px;font-weight:700;color:#fff;margin-top:14px;line-height:1.3;position:relative;z-index:1;}
+.pd-meta{display:flex;align-items:center;gap:6px;margin-top:6px;position:relative;z-index:1;}
+.pd-meta span{font-size:10px;color:rgba(255,255,255,.6);}
+.pd-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.4);}
+.pd-wave{background:#2563EB;height:28px;}
+.pd-wave svg{width:100%;height:28px;display:block;}
+
+/* stats row */
+.pd-stats{display:flex;gap:7px;padding:0 12px;margin-top:-14px;position:relative;z-index:2;}
+.pd-stat{flex:1;background:#fff;border-radius:12px;padding:8px 6px;text-align:center;border:1px solid #E8EDE8;}
+.pds-icon{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;margin:0 auto 4px;}
+.pdi-g{background:#EBF5EE;}
+.pdi-b{background:#E6F0FB;}
+.pdi-o{background:#FFF3E0;}
+.pd-stat svg{width:12px;height:12px;fill:none;stroke-width:2.2;stroke-linecap:round;}
+.svg-g{stroke:#1B5E38;}
+.svg-b{stroke:#185FA5;}
+.svg-o{stroke:#c9700a;}
+.pds-val{font-size:12px;font-weight:700;color:#0f1e13;}
+.pds-lbl{font-size:9px;color:#aaa;}
+
+/* tabs */
+.pd-tabs{display:flex;gap:0;margin:10px 12px 0;background:#fff;border-radius:12px;padding:3px;border:1px solid #E8EDE8;}
+.pd-tab{flex:1;text-align:center;font-size:10px;padding:6px 0;border-radius:9px;color:#aaa;font-weight:500;}
+.pd-tab.on{background:#1B5E38;color:#fff;font-weight:700;}
+
+/* about */
+.pd-about{font-size:11px;color:#6a7e6a;line-height:1.7;text-align:right;}
+
+/* roles */
+.role-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
+.role-name{font-size:12px;font-weight:600;color:#0f1e13;}
+.role-badge{font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;}
+.rb-needed{background:#FFF0E8;color:#c9600a;border:1px solid #FFD4B0;}
+.rb-done{background:#EBF5EE;color:#1B5E38;border:1px solid #C8E6D0;}
+
+/* team avatars */
+.team-avs{display:flex;justify-content:flex-end;gap:-4px;margin-bottom:6px;}
+.t-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid #fff;margin-left:-6px;}
+.tav1{background:#C5E3CE;color:#1B5E38;}
+.tav2{background:#B5D4F4;color:#185FA5;}
+.tav3{background:#F4C0D1;color:#993556;}
+.t-av-more{background:#F0F4F0;color:#888;}
+.team-slots{font-size:10px;color:#8a9e8a;margin-top:3px;text-align:right;}
+
+/* CTA */
+.pd-cta{display:flex;gap:8px;padding:0 12px 14px;}
+.pd-btn-main{flex:2;background:#1B5E38;color:#fff;font-size:12px;font-weight:700;border-radius:13px;padding:11px 0;text-align:center;}
+.pd-btn-sec{flex:1;background:#EBF5EE;color:#1B5E38;font-size:12px;font-weight:700;border-radius:13px;padding:11px 0;text-align:center;border:1.5px solid #C8E6D0;}
+
+/* ══════════════════════
+   SCREEN 2 — SETTINGS
+══════════════════════ */
+.set-screen{background:#F2F4F0;}
+/* profile mini card */
+.set-profile{background:#fff;border-radius:16px;margin:0 12px 10px;padding:14px;display:flex;align-items:center;gap:11px;}
+.sp-av{width:48px;height:48px;border-radius:50%;background:#C5E3CE;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#1B5E38;flex-shrink:0;border:2px solid #fff;outline:2px solid #C8E6D0;}
+.sp-info{flex:1;}
+.sp-name{font-size:14px;font-weight:700;color:#0f1e13;}
+.sp-email{font-size:10px;color:#8a9e8a;margin-top:2px;}
+.sp-arrow{font-size:14px;color:#C8D4C0;}
+
+/* settings rows */
+.set-card{background:#fff;border-radius:14px;margin:0 12px 9px;overflow:hidden;}
+.set-row{display:flex;align-items:center;padding:12px 13px;border-bottom:1px solid #F4F6F2;}
+.set-row:last-child{border-bottom:none;}
+.sr-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sri-g{background:#EBF5EE;}
+.sri-b{background:#E6F0FB;}
+.sri-o{background:#FFF3E0;}
+.sri-r{background:#FEF0F0;}
+.sri-gray{background:#F4F4F2;}
+.sri-pur{background:#EEEDFE;}
+.sr-icon svg{width:15px;height:15px;fill:none;stroke-width:2;stroke-linecap:round;}
+.svg-green{stroke:#1B5E38;}
+.svg-blue{stroke:#185FA5;}
+.svg-orange{stroke:#c9700a;}
+.svg-red{stroke:#c0392b;}
+.svg-gray{stroke:#666;}
+.svg-pur{stroke:#534AB7;}
+.sr-body{flex:1;padding:0 10px;text-align:right;}
+.sr-label{font-size:12px;font-weight:600;color:#0f1e13;}
+.sr-sub{font-size:10px;color:#aaa;margin-top:1px;}
+.sr-right{display:flex;align-items:center;gap:6px;}
+.sr-arrow{font-size:13px;color:#C8D4C0;}
+/* toggle */
+.toggle{width:36px;height:20px;border-radius:20px;position:relative;flex-shrink:0;}
+.tog-on{background:#1B5E38;}
+.tog-off{background:#D0D8D0;}
+.tog-knob{position:absolute;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;}
+.tog-on .tog-knob{left:18px;}
+.tog-off .tog-knob{left:2px;}
+/* badge value */
+.sr-badge{background:#EBF5EE;color:#1B5E38;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;}
+/* version */
+.set-version{text-align:center;font-size:10px;color:#C0CCBA;padding:6px 0 10px;}
+
+/* ══════════════════════
+   SCREEN 3 — FILTER
+══════════════════════ */
+.filter-screen{background:#F2F4F0;}
+/* bottom sheet style */
+.filter-sheet{background:#F2F4F0;flex:1;display:flex;flex-direction:column;}
+.fs-topbar{background:#fff;display:flex;align-items:center;justify-content:space-between;padding:12px 15px;border-bottom:1px solid #EEF2EE;}
+.fs-title{font-size:14px;font-weight:700;color:#0f1e13;}
+.fs-clear{font-size:11px;color:#c0392b;font-weight:600;}
+.fs-close{width:28px;height:28px;background:#F0F2F0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;color:#555;}
+.fs-body{flex:1;padding:12px 12px 0;display:flex;flex-direction:column;gap:0;}
+.filter-card{background:#fff;border-radius:14px;margin-bottom:9px;padding:13px;}
+.fc-title{font-size:11px;font-weight:700;color:#1B5E38;text-align:right;margin-bottom:9px;letter-spacing:.4px;}
+/* chip grid */
+.chip-grid{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;}
+.fchip{padding:6px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1.5px solid;}
+.fc-on{background:#EBF5EE;color:#1B5E38;border-color:#C8E6D0;}
+.fc-off{background:#fff;color:#8a9e8a;border-color:#E0E8DC;}
+/* range slider style */
+.range-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.range-lbl{font-size:11px;color:#0f1e13;font-weight:600;}
+.range-val{font-size:11px;color:#1B5E38;font-weight:700;background:#EBF5EE;padding:3px 10px;border-radius:8px;}
+.range-track{height:4px;background:#E0E8DC;border-radius:4px;position:relative;margin:0 2px;}
+.range-fill{position:absolute;top:0;right:0;height:100%;background:#1B5E38;border-radius:4px;width:60%;}
+.range-thumb{position:absolute;top:-6px;right:58%;width:16px;height:16px;border-radius:50%;background:#1B5E38;border:2px solid #fff;box-shadow:0 2px 6px rgba(27,94,56,.3);}
+/* sort options */
+.sort-opts{display:flex;flex-direction:column;gap:6px;}
+.sort-opt{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:11px;border:1.5px solid #E0E8DC;background:#fff;}
+.sort-opt.sel{border-color:#1B5E38;background:#EBF5EE;}
+.so-txt{font-size:12px;font-weight:600;color:#0f1e13;}
+.so-radio{width:16px;height:16px;border-radius:50%;border:2px solid #D0D8D0;display:flex;align-items:center;justify-content:center;}
+.so-radio.filled{border-color:#1B5E38;background:#1B5E38;}
+.so-radio.filled::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff;}
+/* apply btn */
+.filter-apply{padding:10px 12px 14px;}
+.fa-btn{background:#1B5E38;color:#fff;font-size:13px;font-weight:700;border-radius:14px;padding:13px 0;text-align:center;width:100%;}
+</style>
+
+<div class="wrap">
+
+  <!-- ══ PROJECT DETAILS ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen">
+        <div class="pd-hero">
+          <div class="pd-sbar"><span>9:41</span><span>▲▲ ▬</span></div>
+          <div class="pd-nav">
+            <div class="pd-bookmark"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
+            <div class="pd-type-badge">مشروع</div>
+            <div class="pd-back"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
+          </div>
+          <div class="pd-title">نظام تتبع حافلات الجامعة الذكي</div>
+          <div class="pd-meta">
+            <span>فصل دراسي</span><div class="pd-dot"></div>
+            <span>جامعة الزيتونة</span><div class="pd-dot"></div>
+            <span>برمجة</span>
+          </div>
+        </div>
+        <div class="pd-wave"><svg viewBox="0 0 232 28" preserveAspectRatio="none"><path d="M0 28 Q58 0 116 16 Q174 28 232 6 L232 28 Z" fill="#F2F4F0"/></svg></div>
+
+        <!-- stats -->
+        <div class="pd-stats">
+          <div class="pd-stat">
+            <div class="pds-icon pdi-b"><svg class="svg-b" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="pds-val">3–5</div><div class="pds-lbl">فريق</div>
+          </div>
+          <div class="pd-stat">
+            <div class="pds-icon pdi-o"><svg class="svg-o" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="pds-val">20 يوم</div><div class="pds-lbl">متبقي</div>
+          </div>
+          <div class="pd-stat">
+            <div class="pds-icon pdi-g"><svg class="svg-g" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div class="pds-val">65%</div><div class="pds-lbl">تقدم</div>
+          </div>
+        </div>
+
+        <!-- tabs -->
+        <div class="pd-tabs">
+          <div class="pd-tab">الفريق</div>
+          <div class="pd-tab">المتطلبات</div>
+          <div class="pd-tab on">التفاصيل</div>
+        </div>
+
+        <!-- about -->
+        <div class="card">
+          <div class="sec-lbl">عن المشروع</div>
+          <div class="pd-about">نظام ذكي لتتبع حافلات الجامعة في الوقت الفعلي باستخدام GPS وتطبيق Flutter. يهدف لتحسين تجربة الطلاب وتقليل وقت الانتظار.</div>
+        </div>
+
+        <!-- roles -->
+        <div class="card">
+          <div class="sec-lbl">الأدوار المطلوبة</div>
+          <div class="role-row"><span class="role-badge rb-needed">مطلوب</span><span class="role-name">مطور Flutter</span></div>
+          <div class="role-row"><span class="role-badge rb-needed">مطلوب</span><span class="role-name">مطور Backend</span></div>
+          <div class="role-row" style="margin-bottom:0;"><span class="role-badge rb-done">مكتمل</span><span class="role-name">مصمم UI/UX</span></div>
+        </div>
+
+        <!-- team -->
+        <div class="card">
+          <div class="sec-lbl">أعضاء الفريق الحالي</div>
+          <div class="team-avs">
+            <div class="t-av tav1">أ</div>
+            <div class="t-av tav2">ل</div>
+            <div class="t-av tav3">م</div>
+            <div class="t-av t-av-more">+1</div>
+          </div>
+          <div class="team-slots">2 مقاعد متاحة من أصل 5</div>
+        </div>
+
+        <div class="pd-cta">
+          <div class="pd-btn-sec">رسالة</div>
+          <div class="pd-btn-main">انضم الآن</div>
+        </div>
+      </div>
+    </div>
+    <div class="lbl">تفاصيل المشروع</div>
+  </div>
+
+  <!-- ══ SETTINGS ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen set-screen">
+        <div class="sbar sbar-g"><span>9:41</span><span>▲▲ ▬</span></div>
+        <div class="hdr">
+          <div class="hdr-row">
+            <div class="hdr-icon"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
+            <div class="hdr-title">الإعدادات</div>
+            <div style="width:30px;"></div>
+          </div>
+        </div>
+        <div class="wave"><svg viewBox="0 0 232 22" preserveAspectRatio="none"><path d="M0 22 Q58 0 116 13 Q174 22 232 5 L232 22 Z" fill="#F2F4F0"/></svg></div>
+
+        <!-- profile row -->
+        <div class="set-profile" style="margin-top:10px;">
+          <div class="sp-av">أ</div>
+          <div class="sp-info">
+            <div class="sp-name">أحمد العتيبي</div>
+            <div class="sp-email">ahmed@zu.edu.jo</div>
+          </div>
+          <div class="sp-arrow">›</div>
+        </div>
+
+        <!-- account -->
+        <div class="set-card">
+          <div class="set-row">
+            <div class="sr-right"><span class="sr-arrow">›</span></div>
+            <div class="sr-body"><div class="sr-label">الحساب والأمان</div><div class="sr-sub">كلمة المرور، البريد</div></div>
+            <div class="sr-icon sri-b"><svg class="svg-blue" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          </div>
+          <div class="set-row">
+            <div class="sr-right"><span class="sr-arrow">›</span></div>
+            <div class="sr-body"><div class="sr-label">الإشعارات</div><div class="sr-sub">تخصيص التنبيهات</div></div>
+            <div class="sr-icon sri-o"><svg class="svg-orange" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+          </div>
+          <div class="set-row">
+            <div class="sr-right"><div class="toggle tog-on"><div class="tog-knob"></div></div></div>
+            <div class="sr-body"><div class="sr-label">الوضع الداكن</div><div class="sr-sub">تغيير مظهر التطبيق</div></div>
+            <div class="sr-icon sri-gray"><svg class="svg-gray" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+          </div>
+        </div>
+
+        <!-- app -->
+        <div class="set-card">
+          <div class="set-row">
+            <div class="sr-right"><span class="sr-badge">عربي</span></div>
+            <div class="sr-body"><div class="sr-label">اللغة</div></div>
+            <div class="sr-icon sri-pur"><svg class="svg-pur" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          </div>
+          <div class="set-row">
+            <div class="sr-right"><div class="toggle tog-off"><div class="tog-knob"></div></div></div>
+            <div class="sr-body"><div class="sr-label">الإشعارات الفورية</div></div>
+            <div class="sr-icon sri-g"><svg class="svg-green" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          </div>
+        </div>
+
+        <!-- support -->
+        <div class="set-card">
+          <div class="set-row">
+            <div class="sr-right"><span class="sr-arrow">›</span></div>
+            <div class="sr-body"><div class="sr-label">الدعم والمساعدة</div></div>
+            <div class="sr-icon sri-g"><svg class="svg-green" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg></div>
+          </div>
+          <div class="set-row">
+            <div class="sr-right"><span class="sr-arrow">›</span></div>
+            <div class="sr-body"><div class="sr-label">سياسة الخصوصية</div></div>
+            <div class="sr-icon sri-gray"><svg class="svg-gray" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          </div>
+          <div class="set-row">
+            <div class="sr-right"><span class="sr-arrow" style="color:#c0392b;">›</span></div>
+            <div class="sr-body"><div class="sr-label" style="color:#c0392b;">تسجيل الخروج</div></div>
+            <div class="sr-icon sri-r"><svg class="svg-red" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></div>
+          </div>
+        </div>
+
+        <div class="set-version">v1.0.0 — Nexus App</div>
+      </div>
+    </div>
+    <div class="lbl">الإعدادات</div>
+  </div>
+
+  <!-- ══ FILTER ══ -->
+  <div class="col">
+    <div class="device">
+      <div class="ibar"><div class="isl"></div></div>
+      <div class="screen filter-screen">
+        <div class="sbar sbar-w"><span>9:41</span><span>▲▲ ▬</span></div>
+        <div class="filter-sheet">
+          <div class="fs-topbar">
+            <div class="fs-close">×</div>
+            <div class="fs-title">فلترة النتائج</div>
+            <div class="fs-clear">مسح الكل</div>
+          </div>
+
+          <div class="fs-body">
+
+            <!-- type -->
+            <div class="filter-card">
+              <div class="fc-title">النوع</div>
+              <div class="chip-grid">
+                <span class="fchip fc-on">الكل</span>
+                <span class="fchip fc-off">مسابقة</span>
+                <span class="fchip fc-off">مشروع</span>
+                <span class="fchip fc-off">فريق</span>
+              </div>
+            </div>
+
+            <!-- domain -->
+            <div class="filter-card">
+              <div class="fc-title">المجال</div>
+              <div class="chip-grid">
+                <span class="fchip fc-on">برمجة</span>
+                <span class="fchip fc-on">ريادة أعمال</span>
+                <span class="fchip fc-off">تصميم</span>
+                <span class="fchip fc-off">طبي</span>
+                <span class="fchip fc-off">أكاديمي</span>
+              </div>
+            </div>
+
+            <!-- team size -->
+            <div class="filter-card">
+              <div class="fc-title">حجم الفريق</div>
+              <div class="range-row">
+                <div class="range-val">1 – 3</div>
+                <div class="range-lbl">عدد الأعضاء</div>
+              </div>
+              <div class="range-track">
+                <div class="range-fill"></div>
+                <div class="range-thumb"></div>
+              </div>
+            </div>
+
+            <!-- sort -->
+            <div class="filter-card">
+              <div class="fc-title">الترتيب حسب</div>
+              <div class="sort-opts">
+                <div class="sort-opt sel">
+                  <div class="so-radio filled"></div>
+                  <div class="so-txt">الأحدث</div>
+                </div>
+                <div class="sort-opt">
+                  <div class="so-radio"></div>
+                  <div class="so-txt">الأقرب للانتهاء</div>
+                </div>
+                <div class="sort-opt">
+                  <div class="so-radio"></div>
+                  <div class="so-txt">الأكثر طلباً</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="filter-apply">
+            <div class="fa-btn">تطبيق الفلتر</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lbl">الفلتر المتقدم</div>
+  </div>
+
+</div>

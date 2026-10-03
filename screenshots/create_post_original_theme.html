@@ -1,0 +1,150 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;direction:rtl;background:transparent;}
+.wrap{display:flex;justify-content:center;padding:24px 8px;}
+.device{width:252px;background:#0a0a0a;border-radius:44px;padding:7px;box-shadow:0 24px 60px rgba(0,0,0,.28),inset 0 0 0 1px #2a2a2a;}
+.ibar{height:14px;display:flex;justify-content:center;align-items:center;}
+.isl{width:68px;height:8px;background:#0a0a0a;border-radius:20px;border:1px solid #222;}
+.screen{border-radius:37px;overflow:hidden;background:#F2F4F0;min-height:580px;display:flex;flex-direction:column;}
+
+/* status bar */
+.sbar{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:#333;padding:10px 18px 0;background:#F2F4F0;}
+
+/* topbar */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;background:#F2F4F0;}
+.publish-btn{background:#1B5E38;color:#fff;font-size:11px;font-weight:700;padding:7px 18px;border-radius:20px;}
+.tb-title{font-size:14px;font-weight:700;color:#0f1e13;}
+.close-btn{width:28px;height:28px;background:#E4E8E0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;color:#555;}
+
+/* author row */
+.author-row{display:flex;align-items:center;gap:10px;padding:10px 16px 12px;background:#F2F4F0;}
+.author-av{width:36px;height:36px;border-radius:50%;background:#C5E3CE;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#1B5E38;flex-shrink:0;}
+.author-name{font-size:13px;font-weight:700;color:#0f1e13;}
+.author-scope{font-size:10px;color:#888;margin-top:1px;display:flex;align-items:center;gap:3px;}
+.scope-check{width:12px;height:12px;stroke:#888;fill:none;stroke-width:2;}
+
+/* white cards */
+.card{background:#fff;border-radius:16px;margin:0 12px 10px;padding:14px;}
+
+/* big title */
+.post-title{font-size:20px;font-weight:700;color:#C8D4C0;text-align:right;margin-bottom:8px;}
+.post-body{font-size:11px;color:#B8C4B8;text-align:right;line-height:1.65;}
+
+/* field label */
+.field-lbl{font-size:11px;color:#888;text-align:right;margin-bottom:8px;}
+
+/* domain text input row */
+.domain-input-row{display:flex;align-items:center;justify-content:space-between;border:1.5px solid #E4EAE0;border-radius:12px;padding:10px 12px;background:#FAFCFA;}
+.di-ph{font-size:12px;color:#B8C4B8;text-align:right;flex:1;}
+.di-icon{width:28px;height:28px;background:#EBF5EE;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.di-icon svg{width:13px;height:13px;stroke:#1B5E38;fill:none;stroke-width:2;stroke-linecap:round;}
+
+/* skills */
+.skills-wrap{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;}
+.skill-chip{display:flex;align-items:center;gap:4px;background:#EBF5EE;color:#1B5E38;font-size:10px;font-weight:600;padding:5px 10px;border-radius:20px;border:1px solid #C8E6D0;}
+.sc-x{opacity:.6;font-size:11px;}
+.add-skill{background:#fff;color:#1B5E38;border:1.5px solid #C8E6D0;font-size:10px;font-weight:600;padding:5px 10px;border-radius:20px;}
+
+/* date field */
+.date-row{display:flex;align-items:center;justify-content:space-between;border:1.5px solid #E4EAE0;border-radius:12px;padding:10px 12px;background:#FAFCFA;}
+.dr-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
+.dr-lbl{font-size:10px;color:#AAB4AA;}
+.dr-val{font-size:12px;color:#C0CCBA;}
+.dr-icon{width:28px;height:28px;background:#EBF5EE;border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.dr-icon svg{width:13px;height:13px;stroke:#1B5E38;fill:none;stroke-width:2;stroke-linecap:round;}
+
+/* team size */
+.team-row{display:flex;align-items:center;justify-content:space-between;}
+.team-txt{font-size:13px;font-weight:600;color:#0f1e13;}
+.stepper{display:flex;align-items:center;gap:12px;}
+.step-btn{width:30px;height:30px;border-radius:50%;background:#1B5E38;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;font-weight:500;}
+.step-val{font-size:18px;font-weight:700;color:#0f1e13;min-width:20px;text-align:center;}
+</style>
+
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;">صفحة إنشاء المنشور بالثيم الأصلي</h2>
+
+<div class="wrap">
+  <div class="device">
+    <div class="ibar"><div class="isl"></div></div>
+    <div class="screen">
+
+      <div class="sbar"><span>9:41</span><span>▲▲ ▬</span></div>
+
+      <!-- topbar -->
+      <div class="topbar">
+        <div class="publish-btn">نشر</div>
+        <div class="tb-title">إنشاء منشور</div>
+        <div class="close-btn">×</div>
+      </div>
+
+      <!-- author -->
+      <div class="author-row">
+        <div style="flex:1;text-align:right;">
+          <div class="author-name">أحمد العتيبي</div>
+          <div class="author-scope">
+            <svg class="scope-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+            عام
+          </div>
+        </div>
+        <div class="author-av">i</div>
+      </div>
+
+      <!-- title + body card -->
+      <div class="card">
+        <div class="post-title">عنوان المنشور...</div>
+        <div class="post-body">اكتب تفاصيل المنشور... اذكر المشروع أو المسابقة، والمهارات المطلوبة، وكيفية التواصل...</div>
+      </div>
+
+      <!-- domain card -->
+      <div class="card">
+        <div class="field-lbl">المجال</div>
+        <div class="domain-input-row">
+          <div class="di-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          </div>
+          <div class="di-ph">مثال: برمجة، ريادة أعمال، تصميم...</div>
+        </div>
+      </div>
+
+      <!-- skills card -->
+      <div class="card">
+        <div class="field-lbl">المهارات المطلوبة</div>
+        <div class="skills-wrap">
+          <div class="add-skill">+ إضافة مهارة</div>
+          <div class="skill-chip">UI/UX <span class="sc-x">×</span></div>
+          <div class="skill-chip">React <span class="sc-x">×</span></div>
+          <div class="skill-chip">Node.js <span class="sc-x">×</span></div>
+        </div>
+      </div>
+
+      <!-- team + date card -->
+      <div class="card">
+        <!-- deadline first -->
+        <div style="margin-bottom:14px;">
+          <div class="field-lbl">تاريخ الانتهاء</div>
+          <div class="date-row">
+            <div class="dr-icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="dr-right">
+              <div class="dr-lbl">اختر تاريخاً</div>
+              <div class="dr-val">يوم / شهر / سنة</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- team size second -->
+        <div class="team-row">
+          <div class="stepper">
+            <div class="step-btn">−</div>
+            <div class="step-val">3</div>
+            <div class="step-btn">+</div>
+          </div>
+          <div class="team-txt">حجم الفريق المطلوب</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

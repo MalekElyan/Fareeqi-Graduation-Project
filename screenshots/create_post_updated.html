@@ -1,0 +1,223 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;direction:rtl;background:transparent;}
+.wrap{display:flex;justify-content:center;padding:24px 8px;}
+.device{width:252px;background:#0a0a0a;border-radius:44px;padding:7px;box-shadow:0 24px 60px rgba(0,0,0,.28),inset 0 0 0 1px #2a2a2a;}
+.ibar{height:14px;display:flex;justify-content:center;align-items:center;}
+.isl{width:68px;height:8px;background:#0a0a0a;border-radius:20px;border:1px solid #222;}
+.screen{border-radius:37px;overflow:hidden;background:#F4F6F1;min-height:580px;display:flex;flex-direction:column;}
+
+/* top bar */
+.topbar{background:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;border-bottom:1px solid #EEF2EE;}
+.sbar-row{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:#999;padding:10px 18px 0;background:#fff;}
+.publish-btn{background:#1B5E38;color:#fff;font-size:11px;font-weight:700;padding:7px 18px;border-radius:20px;}
+.tb-title{font-size:14px;font-weight:700;color:#0f1e13;}
+.close-btn{width:30px;height:30px;background:#F2F4F0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:#666;}
+
+/* author row */
+.author-row{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#fff;border-bottom:8px solid #F2F4F0;}
+.author-av{width:38px;height:38px;border-radius:50%;background:#C5E3CE;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#1B5E38;}
+.author-info{}
+.author-name{font-size:13px;font-weight:700;color:#0f1e13;}
+.author-scope{background:#EBF5EE;color:#1B5E38;font-size:10px;font-weight:600;padding:2px 9px;border-radius:8px;display:inline-block;margin-top:2px;}
+
+/* sections */
+.section{background:#fff;padding:14px 16px;border-bottom:8px solid #F2F4F0;}
+.sec-label{font-size:11px;font-weight:700;color:#1B5E38;text-align:right;letter-spacing:.5px;margin-bottom:10px;}
+
+/* title + body inputs */
+.post-title{font-size:15px;font-weight:700;color:#0f1e13;text-align:right;border:none;border-bottom:2px solid #EEF2EE;padding-bottom:8px;width:100%;background:transparent;outline:none;}
+.post-body{font-size:12px;color:#8a9e8a;text-align:right;border:none;resize:none;height:56px;margin-top:10px;width:100%;background:transparent;outline:none;line-height:1.6;}
+
+/* ── FIELD: underline style ── */
+.field-group{margin-bottom:14px;}
+.field-group:last-child{margin-bottom:0;}
+.field-lbl{font-size:11px;font-weight:600;color:#6a7e6a;text-align:right;margin-bottom:6px;}
+.field-row{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #EEF2EE;padding-bottom:9px;}
+.field-row.active{border-bottom-color:#1B5E38;}
+.fr-icon{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.fri-g{background:#EBF5EE;}
+.fri-b{background:#E6F0FB;}
+.fri-o{background:#FFF3E0;}
+.fri-r{background:#FEF0F0;}
+.fr-icon svg{width:12px;height:12px;fill:none;stroke-width:2.2;stroke-linecap:round;}
+.svg-g{stroke:#1B5E38;}
+.svg-b{stroke:#185FA5;}
+.svg-o{stroke:#c9700a;}
+.svg-r{stroke:#c0392b;}
+.fr-val{font-size:13px;font-weight:500;color:#1a2e1a;text-align:right;flex:1;padding:0 8px;}
+.fr-ph{color:#C0CCBA;font-weight:400;}
+.fr-arrow{font-size:12px;color:#C8D4C0;}
+
+/* ── DOMAIN SELECTOR — chips grid ── */
+.domain-grid{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end;}
+.domain-chip{padding:7px 13px;border-radius:20px;font-size:11px;font-weight:600;border:1.5px solid;display:flex;align-items:center;gap:5px;cursor:pointer;}
+.dc-on{background:#EBF5EE;color:#1B5E38;border-color:#C8E6D0;}
+.dc-off{background:#fff;color:#8a9e8a;border-color:#E0E8DC;}
+.dc-icon{width:16px;height:16px;border-radius:5px;display:flex;align-items:center;justify-content:center;}
+.dci-g{background:#EBF5EE;}
+.dci-b{background:#E6F0FB;}
+.dci-p{background:#EEEDFE;}
+.dci-o{background:#FFF3E0;}
+.dci-r{background:#FEF0F0;}
+.dci-t{background:#E0F5EE;}
+.dc-icon svg{width:9px;height:9px;fill:none;stroke-width:2.2;stroke-linecap:round;}
+.dci-g svg{stroke:#1B5E38;}
+.dci-b svg{stroke:#185FA5;}
+.dci-p svg{stroke:#534AB7;}
+.dci-o svg{stroke:#c9700a;}
+.dci-r svg{stroke:#c0392b;}
+.dci-t svg{stroke:#0F6E56;}
+.dc-on .dc-icon.dci-g{background:rgba(27,94,56,.15);}
+
+/* ── SKILLS chips ── */
+.skills-wrap{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;}
+.skill-chip{display:flex;align-items:center;gap:4px;background:#EBF5EE;color:#1B5E38;font-size:11px;font-weight:600;padding:5px 11px;border-radius:20px;border:1px solid #C8E6D0;}
+.sc-x{color:#1B5E38;font-size:12px;font-weight:700;opacity:.6;}
+.add-skill{background:#fff;color:#1B5E38;border:1.5px dashed #9ACBAA;font-size:11px;font-weight:600;padding:5px 11px;border-radius:20px;display:flex;align-items:center;gap:4px;}
+
+/* ── TEAM SIZE ── */
+.team-row{display:flex;align-items:center;justify-content:space-between;}
+.team-lbl{font-size:13px;font-weight:600;color:#0f1e13;}
+.stepper{display:flex;align-items:center;gap:12px;}
+.step-btn{width:30px;height:30px;border-radius:50%;background:#1B5E38;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;font-weight:700;line-height:1;}
+.step-val{font-size:18px;font-weight:700;color:#0f1e13;min-width:20px;text-align:center;}
+
+/* ── DATE FIELD ── */
+.date-field{display:flex;align-items:center;justify-content:space-between;background:#F4F6F1;border:1.5px solid #E0E8DC;border-radius:12px;padding:10px 14px;}
+.date-left{display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
+.date-lbl-sm{font-size:10px;color:#AAB8AA;}
+.date-val{font-size:13px;font-weight:600;color:#1a2e1a;}
+.date-ph{font-size:12px;color:#C0CCBA;}
+.date-icon{width:32px;height:32px;background:#EBF5EE;border-radius:9px;display:flex;align-items:center;justify-content:center;}
+.date-icon svg{width:15px;height:15px;stroke:#1B5E38;fill:none;stroke-width:2;stroke-linecap:round;}
+
+/* ── LINK TO PROJECT ── */
+.link-row{display:flex;align-items:center;justify-content:space-between;background:#F4F6F1;border:1.5px solid #E0E8DC;border-radius:12px;padding:10px 14px;}
+.lr-right{display:flex;flex-direction:column;gap:2px;align-items:flex-end;}
+.lr-lbl{font-size:10px;color:#AAB8AA;}
+.lr-val{font-size:12px;font-weight:600;color:#C0CCBA;}
+.lr-icon{width:32px;height:32px;background:#E6F0FB;border-radius:9px;display:flex;align-items:center;justify-content:center;}
+.lr-icon svg{width:15px;height:15px;stroke:#185FA5;fill:none;stroke-width:2;stroke-linecap:round;}
+</style>
+
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;">صفحة إنشاء المنشور المحدّثة</h2>
+
+<div class="wrap">
+  <div class="device">
+    <div class="ibar"><div class="isl"></div></div>
+    <div class="screen">
+
+      <div class="sbar-row"><span>9:41</span><span>▲▲ ▬</span></div>
+
+      <!-- topbar -->
+      <div class="topbar">
+        <div class="publish-btn">نشر</div>
+        <div class="tb-title">إنشاء منشور</div>
+        <div class="close-btn">×</div>
+      </div>
+
+      <!-- author -->
+      <div class="author-row">
+        <div style="flex:1;text-align:right;">
+          <div class="author-name">أحمد العتيبي</div>
+          <span class="author-scope">عام</span>
+        </div>
+        <div class="author-av">أ</div>
+      </div>
+
+      <!-- title + body -->
+      <div class="section" style="border-bottom:8px solid #F2F4F0;">
+        <div class="post-title">عنوان المنشور...</div>
+        <div class="post-body">اكتب تفاصيل المنشور... اذكر المشروع أو المسابقة، والمهارات المطلوبة، وكيفية التواصل...</div>
+      </div>
+
+      <!-- DOMAIN SECTION — replaces نوع المنشور -->
+      <div class="section">
+        <div class="sec-label">مجال المنشور</div>
+        <div class="domain-grid">
+          <div class="domain-chip dc-on">
+            <div class="dc-icon dci-b"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            برمجة
+          </div>
+          <div class="domain-chip dc-off">
+            <div class="dc-icon dci-o"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg></div>
+            ريادة أعمال
+          </div>
+          <div class="domain-chip dc-off">
+            <div class="dc-icon dci-r"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            طبي
+          </div>
+          <div class="domain-chip dc-off">
+            <div class="dc-icon dci-p"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            تصميم
+          </div>
+          <div class="domain-chip dc-off">
+            <div class="dc-icon dci-t"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+            أكاديمي
+          </div>
+          <div class="domain-chip dc-off">
+            <div class="dc-icon dci-g"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+            أخرى
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="section">
+        <div class="sec-label">المهارات المطلوبة</div>
+        <div class="skills-wrap">
+          <div class="add-skill">+ مهارة</div>
+          <div class="skill-chip">UI/UX <span class="sc-x">×</span></div>
+          <div class="skill-chip">Node.js <span class="sc-x">×</span></div>
+          <div class="skill-chip">React <span class="sc-x">×</span></div>
+        </div>
+      </div>
+
+      <!-- TEAM SIZE + DEADLINE -->
+      <div class="section">
+        <div class="sec-label">تفاصيل الفريق</div>
+
+        <!-- team size -->
+        <div class="team-row" style="margin-bottom:14px;">
+          <div class="stepper">
+            <div class="step-btn" style="font-size:20px;padding-bottom:2px;">−</div>
+            <div class="step-val">3</div>
+            <div class="step-btn">+</div>
+          </div>
+          <div class="team-lbl">حجم الفريق المطلوب</div>
+        </div>
+
+        <!-- deadline date -->
+        <div class="field-group" style="margin-bottom:0;">
+          <div class="field-lbl">تاريخ الانتهاء</div>
+          <div class="date-field">
+            <div class="date-icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="date-left">
+              <div class="date-lbl-sm">اختر تاريخاً</div>
+              <div class="date-ph">يوم / شهر / سنة</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LINK TO PROJECT/CONTEST -->
+      <div class="section" style="border-bottom:none;">
+        <div class="sec-label">الارتباط</div>
+        <div class="link-row">
+          <div class="lr-icon">
+            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <div class="lr-right">
+            <div class="lr-lbl">مرتبط بمسابقة / مشروع</div>
+            <div class="lr-val">اختر مسابقة أو مشروع...</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
